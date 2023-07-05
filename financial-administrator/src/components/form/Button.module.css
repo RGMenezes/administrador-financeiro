@@ -1,0 +1,25 @@
+.button{
+    padding: 10px;
+
+    cursor: pointer;
+    background-color: var(--color);
+    border: none;
+    border-radius: 15px;
+
+    font: normal 600 1em var(--font);
+    color: var(--color-bg);
+
+    transition: all .3s ease;
+}
+
+@media screen and (min-width: 481px) {
+    .button:hover{
+        background-color: var(--color-main);
+    }
+}
+
+.button:active{
+    background-color: var(--color-basic);
+
+    transition: all .1s ease;
+}

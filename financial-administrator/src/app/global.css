@@ -25,6 +25,7 @@
 h1{
     font: normal 800 2em var(--font);
     color: var(--color);
+    text-align: center;
 }
 h2{
     font: normal 800 1.6em var(--font);

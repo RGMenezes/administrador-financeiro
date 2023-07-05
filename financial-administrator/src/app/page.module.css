@@ -1,0 +1,42 @@
+.container_login{
+    min-width: 100vw;
+    min-height: 100vh;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-bg);
+    background-image: var(--gradient);
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+
+    position: fixed;
+    top: 20px;
+
+    fill: var(--color-bg);
+}
+
+.login{
+    width: 300px;
+    padding: 30px 10px;
+    margin-top: 100px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 30px;
+
+    background-color: var(--color-bg);
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container_y{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}

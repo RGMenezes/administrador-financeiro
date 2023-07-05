@@ -1,0 +1,33 @@
+.link{
+    font: normal 600 1em var(--font);
+    color: var(--color-secundary);
+
+    transition: all .3s ease;
+}
+
+.link_spaced{
+    padding: 10px;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+@media screen and (min-width: 481px) {
+    .link:hover{
+        color: var(--color);
+    }
+}
+
+.link:active{
+    color: var(--color-main);
+
+    transition: all .1s ease;
+}
+
+.link_spaced:active{
+    background-color: var(--color-basic);
+
+    color: var(--color-bg);
+}
