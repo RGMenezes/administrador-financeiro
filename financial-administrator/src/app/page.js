@@ -27,12 +27,15 @@ export default function Page(){
                         text="E-mail"
                         placeholder="E-mail"
                         id="email"
+                        required={true}
                     />
                     <InputText
                         type="password"
                         text="Senha"
                         placeholder="Senha"
                         id="password"
+                        minLength={8}
+                        required={true}
                     />
                 </div>
 
