@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-flow: column;
+}
+
+.container label{
+    cursor: pointer;
+    font: normal 600 .95em var(--font);
+    color: var(--color);
+
+    transition: all .3s ease;
+}
+
+.container input{
+    padding: 5px;
+
+    outline: none;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+
+    font: normal normal .9em var(--font);
+    color: var(--color);
+
+    transition: all .3s ease;
+}
+
+.container input:focus{
+    border-color: var(--color-basic);
+
+    color: var(--color-basic);
+}
+
+.container:focus-within label{
+    color: var(--color-basic);
+}

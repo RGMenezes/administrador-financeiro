@@ -4,11 +4,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;600;800&display=swap');
 
 :root{
-    --color: #f7f7f7;
+    --color: #222222;
     --color-basic: #868686;
     --color-main: #48ce8a;
     --color-secundary: #2a8d87;
-    --color-bg: #222222;
+    --color-bg: #f7f7f7;
 
     --gradient: linear-gradient(to right bottom, #48ce8a, #31be8f, #21ae90, #209e8d, #2a8d87);
 
@@ -24,22 +24,22 @@
 
 h1{
     font: normal 800 2em var(--font);
-    color: var(--color-bg);
+    color: var(--color);
 }
 h2{
     font: normal 800 1.6em var(--font);
-    color: var(--color-bg);
+    color: var(--color);
 }
 h3{
     font: normal 600 1.4em var(--font);
-    color: var(--color-bg);
+    color: var(--color);
 }
 h4{
     font: normal 600 1.2em var(--font);
-    color: var(--color-bg);
+    color: var(--color);
 }
 
 p{
     font: normal normal 1em var(--font);
-    color: var(--color-bg);
+    color: var(--color);
 }
