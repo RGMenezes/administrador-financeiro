@@ -1,3 +1,6 @@
+'use client';
+import { useEffect } from "react";
+
 import styles from "./page.module.css";
 
 import InputText from "../components/form/InputText";
@@ -7,8 +10,14 @@ import Logo from "../../public/logo/logo.js";
 
 export default function Page(){
 
-    function submitLogin(e){
+    async function submitLogin(e){
         e.preventDefault();
+
+        const dados = {
+            email: e.target.email.value,
+            password: e.target.password.value
+        };
+    
     };
 
     return (
@@ -18,7 +27,7 @@ export default function Page(){
                 <Logo />
             </div>
             
-            <form autoComplete="on" className={styles.login} >
+            <form onSubmit={submitLogin} autoComplete="on" className={styles.login} >
                 <h1>Login</h1>
 
                 <div className={styles.container_y}>
