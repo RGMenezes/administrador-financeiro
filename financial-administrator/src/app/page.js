@@ -1,6 +1,4 @@
 'use client';
-import { useEffect } from "react";
-
 import styles from "./page.module.css";
 
 import InputText from "../components/form/InputText";
@@ -17,7 +15,6 @@ export default function Page(){
             email: e.target.email.value,
             password: e.target.password.value
         };
-    
     };
 
     return (
