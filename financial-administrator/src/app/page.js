@@ -13,11 +13,11 @@ export default function Page(){
     async function submitLogin(e){
         e.preventDefault();
 
-        const dados = {
-            email: e.target.email.value,
-            password: e.target.password.value
-        };
+        api.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
 
+        }).catch((err) => {
+            console.error(`Erro na api: ${err}`);
+        });
     };
 
     return (
