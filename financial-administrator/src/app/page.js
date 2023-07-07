@@ -1,4 +1,6 @@
 'use client';
+import api from "../api/db";
+
 import styles from "./page.module.css";
 
 import InputText from "../components/form/InputText";
@@ -15,6 +17,7 @@ export default function Page(){
             email: e.target.email.value,
             password: e.target.password.value
         };
+
     };
 
     return (
