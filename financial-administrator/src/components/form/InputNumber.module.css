@@ -1,0 +1,103 @@
+.container{
+    display: flex;
+    flex-flow: column;
+}
+
+.container label{
+    cursor: pointer;
+    font: normal 600 .95em var(--font);
+    color: var(--color);
+
+    transition: all .3s ease;
+}
+
+.container ::-webkit-inner-spin-button{
+    display: none;
+}
+.container input{
+    min-width: 100%;
+    padding: 5px;
+    padding-right: 0px;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    font: normal normal .9em var(--font);
+    color: var(--color);
+
+    transition: all .3s ease;
+}
+
+.input_container{
+    display: grid;
+    grid-template-columns: auto 0px;
+    align-items: center;
+
+    border: 1px solid var(--color);
+    border-radius: 5px;
+
+    transition: all .3s ease;
+}
+
+.button_container{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+
+    border-radius: 5px;
+}
+
+.button_container *{
+    width: 100%;
+
+    display: none;
+    
+    cursor: pointer;
+    color: transparent;
+}
+
+@media screen and (min-width: 481px) {
+
+    .input_container{
+        grid-template-columns: auto 25px;
+    }
+
+    .button_container *{
+        display: block;
+
+        transition: all .3s ease;
+    }
+    .button_container *:hover{
+        color: var(--color-basic);
+    }
+    .button_container *:active{
+        background-color: var(--color);
+        color: var(--color-bg);
+    }
+
+    .container:hover .input_container{
+        border-color: var(--color-main);
+    
+        color: var(--color-main);
+    }
+    .container:hover .button_container *{
+        color: var(--color-main);
+    }
+    
+    .container:hover label{
+        color: var(--color-main);
+    }
+}
+
+.container input:focus{
+    border-color: var(--color-basic);
+
+    color: var(--color-basic);
+}
+
+.container:focus-within label{
+    color: var(--color-basic);
+}

@@ -8,7 +8,7 @@ import AlertBox from "@/components/system/AlertBox";
 
 import InputText from "@/components/form/InputText";
 import Button from "@/components/form/Button";
-import Link from "@/components/form/LinkText";
+import Link from "@/components/system/LinkText";
 import Logo from "../../public/logo/logo.js";
 
 export default function Page(){
