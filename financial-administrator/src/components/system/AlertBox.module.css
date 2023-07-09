@@ -1,0 +1,33 @@
+.container{
+    width: 300px;
+    height: fit-content;
+
+    padding: 15px;
+    
+    z-index: 2;
+    position: fixed;
+    top: 0px;
+    left: 50%;
+
+    background-color: var(--color-bg);
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+
+    font: normal normal 1em var(--font);
+    color: var(--color);
+    text-align: center;
+
+    transform: translate(-50%, -100%) scale(0);
+    transition: all .3s ease;
+}
+
+.success{
+    background-color: #58D68D;
+}
+.error{
+    background-color: #E74C3C;
+}
+
+.fade{
+    transform: translate(-50%, 20px) scale(1);
+}

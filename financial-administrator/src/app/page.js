@@ -1,27 +1,37 @@
 'use client';
-import api from "../api/db";
+import db from "@/api/db";
+import { useState } from "react";
 
 import styles from "./page.module.css";
 
-import InputText from "../components/form/InputText";
+import AlertBox from "@/components/system/AlertBox";
+
+import InputText from "@/components/form/InputText";
 import Button from "@/components/form/Button";
 import Link from "@/components/form/LinkText";
 import Logo from "../../public/logo/logo.js";
 
 export default function Page(){
+    const [onAlert, setOnAlert] = useState({});
 
     async function submitLogin(e){
         e.preventDefault();
 
-        api.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
-
+        db.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
+            console.log(res.data)
+            setOnAlert(res.data);
+            if(res.data.type == "error"){
+            }else{
+            };
         }).catch((err) => {
-            console.error(`Erro na api: ${err}`);
+            console.error(`Erro no banco de dados: ${err}`);
         });
     };
 
     return (
         <main className={styles.container_login}>
+
+            <AlertBox alert={onAlert} />
 
             <div className={styles.logo}>
                 <Logo />
