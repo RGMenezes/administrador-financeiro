@@ -13,21 +13,29 @@ import Link from "@/components/system/LinkText";
 
 
 export default function Register(){
+
     const [onAlert, setOnAlert] = useState({});
 
     function submitRegister(e){
         e.preventDefault();
 
-        const newUser = {
-
+        if(e.target.password.value === e.target.confirm_password.value){
+            const newUser = {
+                userName: e.target.name.value,
+                email: e.target.email.value,
+                password: e.target.password.value,
+                wage: e.target.wage.value
+            };
+    
+            db.post("/register", newUser).then((res) => {
+                setOnAlert({type: res.data.type, msg: res.data.msg});
+            }).catch((err) => {
+                setOnAlert({type: "error", msg:"Erro ao enviar o registro!"});
+                console.log(`Erro ao enviar o registro: ${err}`);
+            });
+        }else{
+            setOnAlert({type: "error", msg:"As senhas não são iguais!"});
         };
-
-        db.post("/register", newUser).then((res) => {
-
-        }).catch((err) => {
-            setOnAlert({type: "error", msg:"Erro ao enviar o registro!"});
-            console.log(`Erro ao enviar o registro: ${err}`);
-        });
 
     };
 
@@ -64,8 +72,7 @@ export default function Register(){
                         text="Salário"
                         placeholder="Salário"
                         id="wage"
-                        min={-5}
-                        max={5}
+                        min={0}
                         required={true}
                     />
                     <InputText

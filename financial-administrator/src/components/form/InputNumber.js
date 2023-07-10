@@ -9,7 +9,6 @@ export default function InputNumber({text, id, min, max, placeholder, required})
     const [value, setValue] = useState('');
 
     function handleChange(e){
-        console.log(e.target.value);
         Number.isNaN(value) ? setValue('') : setValue(minMaxValue(parseInt(e.target.value)));
 
         function minMaxValue(value){

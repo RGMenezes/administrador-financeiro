@@ -16,6 +16,25 @@
 }
 
 
+::-webkit-scrollbar{
+    width: 0px;
+    height: 5px;
+
+    background-color: var(--color-bg);
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--color-secundary);
+    border: 1px solid var(--color-bg);
+    border-radius: 5px;
+}
+@media screen and (min-width: 481px) {
+    ::-webkit-scrollbar{
+        width: 10px;
+        height: 10px;
+    }
+}
+
+
 *{
     padding: 0px;
     margin: 0px;

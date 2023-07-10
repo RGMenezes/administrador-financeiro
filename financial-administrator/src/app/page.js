@@ -18,7 +18,6 @@ export default function Page(){
         e.preventDefault();
 
         db.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
-            console.log(res.data)
             setOnAlert(res.data);
             if(res.data.type == "error"){
             }else{
@@ -46,6 +45,7 @@ export default function Page(){
                         text="E-mail"
                         placeholder="E-mail"
                         id="email"
+                        autoComplete="email"
                         required={true}
                     />
                     <InputText
@@ -53,6 +53,7 @@ export default function Page(){
                         text="Senha"
                         placeholder="Senha"
                         id="password"
+                        autoComplete="current-password"
                         minLength={8}
                         required={true}
                     />

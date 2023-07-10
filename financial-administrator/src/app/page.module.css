@@ -1,5 +1,4 @@
 .container_login{
-    min-width: 100vw;
     min-height: 100vh;
 
     display: flex;
@@ -15,8 +14,7 @@
     width: 50px;
     height: 50px;
 
-    position: fixed;
-    top: 20px;
+    margin-top: 20px;
 
     fill: var(--color-bg);
 }
@@ -24,7 +22,7 @@
 .login{
     width: 300px;
     padding: 30px 10px;
-    margin-top: 100px;
+    margin: 150px 0px;
 
     display: flex;
     flex-flow: column nowrap;
