@@ -29,7 +29,7 @@
     transition: all .3s ease;
 }
 
-.input_container{
+.input{
     display: grid;
     grid-template-columns: auto 0px;
     align-items: center;
@@ -40,7 +40,7 @@
     transition: all .3s ease;
 }
 
-.button_container{
+.arrows{
     display: grid;
     grid-template-rows: 1fr 1fr;
     align-items: center;
@@ -50,7 +50,7 @@
     border-radius: 5px;
 }
 
-.button_container *{
+.arrows *{
     width: 100%;
 
     display: none;
@@ -61,29 +61,29 @@
 
 @media screen and (min-width: 481px) {
 
-    .input_container{
+    .input{
         grid-template-columns: auto 25px;
     }
 
-    .button_container *{
+    .arrows *{
         display: block;
 
         transition: all .3s ease;
     }
-    .button_container *:hover{
+    .arrows *:hover{
         color: var(--color-basic);
     }
-    .button_container *:active{
+    .arrows *:active{
         background-color: var(--color);
         color: var(--color-bg);
     }
 
-    .container:hover .input_container{
+    .container:hover .input{
         border-color: var(--color-main);
     
         color: var(--color-main);
     }
-    .container:hover .button_container *{
+    .container:hover .arrows *{
         color: var(--color-main);
     }
     

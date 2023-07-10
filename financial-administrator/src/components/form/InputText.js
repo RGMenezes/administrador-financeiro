@@ -1,6 +1,6 @@
 import styles from "./InputText.module.css";
 
-export default function Input({type, text, placeholder, id, minLength, maxLenght, required = false}){
+export default function Input({type, text, placeholder, id, minLength, maxLenght, required = false, autoComplete}){
 
     const rqd = required;
 
@@ -15,6 +15,7 @@ export default function Input({type, text, placeholder, id, minLength, maxLenght
                     placeholder={placeholder}
                     minLength={minLength}
                     maxLength={maxLenght}
+                    autoComplete={autoComplete}
                     required
                 />
             :   
@@ -25,7 +26,7 @@ export default function Input({type, text, placeholder, id, minLength, maxLenght
                     placeholder={placeholder}
                     minLength={minLength}
                     maxLength={maxLenght}
-                    
+                    autoComplete={autoComplete}
                 />
             }
         </div>

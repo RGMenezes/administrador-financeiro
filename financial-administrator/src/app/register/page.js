@@ -49,6 +49,7 @@ export default function Register(){
                         text="Nome"
                         placeholder="Nome completo"
                         id="name"
+                        autoComplete="userName"
                         required={true}
                     />
                     <InputText
@@ -56,13 +57,15 @@ export default function Register(){
                         text="E-mail"
                         placeholder="E-mail"
                         id="email"
+                        autoComplete="email"
                         required={true}
                     />
                     <InputNumber 
                         text="Salário"
                         placeholder="Salário"
                         id="wage"
-                        min={10}
+                        min={-5}
+                        max={5}
                         required={true}
                     />
                     <InputText
@@ -71,6 +74,7 @@ export default function Register(){
                         placeholder="Senha"
                         id="password"
                         minLength={8}
+                        autoComplete="new-password"
                         required={true}
                     />
                     <InputText
@@ -79,6 +83,7 @@ export default function Register(){
                         placeholder="Digite sua senha novamente"
                         id="confirm_password"
                         minLength={8}
+                        autoComplete="new-password"
                         required={true}
                     />
                 </div>
