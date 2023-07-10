@@ -5,6 +5,7 @@ import db from "@/api/db";
 import styles from "./styles.module.css";
 
 import AlertBox from "@/components/system/AlertBox";
+import Loading from "@/components/system/Loading";
 import Logo from "../../../public/logo/logo";
 import InputText from "@/components/form/InputText";
 import InputNumber from "@/components/form/InputNumber";
@@ -15,11 +16,14 @@ import Link from "@/components/system/LinkText";
 export default function Register(){
 
     const [onAlert, setOnAlert] = useState({});
+    const [loading, setLoading] = useState(false);
 
     function submitRegister(e){
         e.preventDefault();
 
         if(e.target.password.value === e.target.confirm_password.value){
+            setLoading(true);
+
             const newUser = {
                 userName: e.target.name.value,
                 email: e.target.email.value,
@@ -32,7 +36,7 @@ export default function Register(){
             }).catch((err) => {
                 setOnAlert({type: "error", msg:"Erro ao enviar o registro!"});
                 console.log(`Erro ao enviar o registro: ${err}`);
-            });
+            }).finally(() => setLoading(false));
         }else{
             setOnAlert({type: "error", msg:"As senhas não são iguais!"});
         };
@@ -43,6 +47,7 @@ export default function Register(){
         <main className={styles.container_register}>
 
             <AlertBox alert={onAlert} />
+            {loading && <Loading />}
 
             <div className={styles.logo}>
                 <Logo />

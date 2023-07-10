@@ -1,0 +1,36 @@
+@keyframes coinTranslate {
+    40%{
+        transform: rotateY(360deg) translate(0%, -200%);
+    }
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+
+    padding-top: 100px;
+    
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.logo{
+    width: 100px;
+
+    padding: 5px;
+
+    fill: var(--color);
+
+    border: 6px solid var(--color);
+    border-radius: 100px;
+
+    animation: coinTranslate 4s infinite;
+}
