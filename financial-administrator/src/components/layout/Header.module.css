@@ -1,0 +1,36 @@
+.header_container{
+    width: 100%;
+    padding: 10px 20px;
+
+    position: sticky;
+    top: 0px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    backdrop-filter: blur(4px);
+}
+
+.logo{
+    cursor: pointer;
+    width: 40px;
+
+    fill: var(--color);
+}
+
+.menu_icon{
+    cursor: pointer;
+
+    font: normal normal 2.5em var(--font);
+    color: var(--color);
+}
+
+.menu{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+
+    background-color: var(--color-bg);
+}

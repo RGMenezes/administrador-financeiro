@@ -1,11 +1,18 @@
+import styles from "./layout.module.css"
+
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+
 export default function layout({children}){
     return(
-        <>
-            {/* header */}
+        <div className={styles.bg}>
+            <Header />
 
-            {children}
+            <main className={styles.main} >
+                {children}
+            </main>
 
-            {/* footer */}
-        </>
+            <Footer />
+        </div>
     );
 };
