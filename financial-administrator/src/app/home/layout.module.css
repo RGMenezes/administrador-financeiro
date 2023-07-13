@@ -1,5 +1,15 @@
 .bg{
     background-color: var(--color-bg);
+
+    transition: all .3s ease;
+}
+
+.dark{
+    --color-bg: #222222;
+    --color-basic: #868686;
+    --color-secundary: #48ce8a;
+    --color-main: #2a8d87;
+    --color: #f7f7f7;
 }
 
 .main{
