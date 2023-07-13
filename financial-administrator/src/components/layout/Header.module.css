@@ -23,6 +23,8 @@
     width: 40px;
 
     fill: var(--color);
+
+    transition: all .3s ease;
 }
 
 .icon{
@@ -38,9 +40,19 @@
 }
 
 @media screen and (min-width: 481px){
+    .logo:hover{
+        fill: var(--color-basic);
+    }
+
     .icon:hover{
         color: var(--color-main);
     }
+}
+
+.logo:active{
+    fill: var(--color-secundary);
+
+    transition: all .1s ease;
 }
 
 .icon:active{
