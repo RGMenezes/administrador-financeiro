@@ -34,7 +34,7 @@ export default function Header({setTheme}){
     useEffect(() => {
         setLoading(true);
         
-        db.get("/login/user").then(res => {
+        db.get("/user").then(res => {
             if(res.data.type === "object"){
                 setUser(res.data.data);
                 setOnTheme(res.data.data.theme);
@@ -62,16 +62,16 @@ export default function Header({setTheme}){
     }, []);
 
     useEffect(() => {
-        const handleOutsideScroll = () => setMenu("slide_out");
-        document.addEventListener('scroll', handleOutsideScroll);
-        return () => document.removeEventListener('scroll', handleOutsideScroll);
-    }, []);
-
-    useEffect(() => {
         setTheme(onTheme);
-    }, [onTheme]);
 
-    const activeMenu = () => menu == "slide_in" ? setMenu("slide_out") : setMenu("slide_in");
+        if(user.email){
+            db.put("/user/edit/theme", {id: user.id, theme: user.theme}).then((res) => {
+                if(res.data.type == "error"){
+                    setOnAlert(res.data);
+                };
+            }).catch(err => console.log(`Erro ao conectar no banco de dados: ${err}`));
+        };
+    }, [onTheme]);
 
     function changeTheme(){
         if(onTheme){
@@ -87,6 +87,27 @@ export default function Header({setTheme}){
                 setFadeTheme("fade_in");
             }, 300);
         };
+        user.theme = onTheme;
+    };
+
+
+    useEffect(() => {
+        const handleOutsideScroll = () => setMenu("slide_out");
+        document.addEventListener('scroll', handleOutsideScroll);
+        return () => document.removeEventListener('scroll', handleOutsideScroll);
+    }, []);
+
+    const activeMenu = () => menu == "slide_in" ? setMenu("slide_out") : setMenu("slide_in");
+
+
+    const settings = () => router.push("/home/setting");
+
+
+    function logout(){
+        db.get("/logout").then((res) => {
+            setOnAlert(res.data);
+            router.push(res.data.redirect);
+        }).catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`));
     };
 
     return(
@@ -121,11 +142,15 @@ export default function Header({setTheme}){
                     </ul>
                 </nav>
                 <footer>
-                    <IoSettingsSharp className={styles.icon} />
+                    <IoSettingsSharp onClick={settings} className={styles.icon} />
 
-                    {onTheme ? <HiSun onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} /> : <HiMoon onClick={changeTheme} className={`${styles.icon} ${styles[fadeThemeDark]}`} />}
+                    {onTheme ? 
+                        <HiMoon onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} /> 
+                    : 
+                        <HiSun onClick={changeTheme} className={`${styles.icon} ${styles[fadeThemeDark]}`} />
+                    }
                     
-                    <HiLogout className={styles.icon} />
+                    <HiLogout onClick={logout} className={styles.icon} />
                 </footer>
             </section>
         </header>
