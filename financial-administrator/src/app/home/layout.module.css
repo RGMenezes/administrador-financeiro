@@ -1,6 +1,18 @@
 .bg{
+    height: 100vh;
+
+    overflow: auto;
     background-color: var(--color-bg);
 
+    transition: all .3s ease;
+}
+
+.bg::-webkit-scrollbar, .bg *::-webkit-scrollbar{
+    background-color: var(--color-bg);
+    transition: all .3s ease;
+}
+.bg::-webkit-scrollbar-thumb, .bg *::-webkit-scrollbar-thumb{
+    background-color: var(--color);
     transition: all .3s ease;
 }
 
