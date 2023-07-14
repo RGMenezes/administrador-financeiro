@@ -21,6 +21,8 @@
 }
 
 .icon_container{
+    width: 105px;
+
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
