@@ -66,7 +66,7 @@ export default function Page(){
 
                 <div className={styles.container_y}>
                     <Button type="submit" text="Entrar" />
-                    <Link to="/register" text="Registrar-se" spaced={true} />
+                    <Link to="/register" text="Registrar-se" spaced={true} detach={true} />
                 </div>
 
             </form>

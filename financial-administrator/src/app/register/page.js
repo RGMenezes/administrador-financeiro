@@ -102,7 +102,7 @@ export default function Register(){
 
                 <div className={styles.container_y}>
                     <Button type="submit" text="Registrar" />
-                    <Link to="/" text="Login" spaced={true} />
+                    <Link to="/" text="Login" spaced={true} detach={true} />
                 </div>
 
             </form>

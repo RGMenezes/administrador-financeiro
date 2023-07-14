@@ -1,8 +1,11 @@
 .link{
     font: normal 600 1em var(--font);
-    color: var(--color-secundary);
+    color: var(--color);
 
     transition: all .3s ease;
+}
+.detach{
+    color: var(--color-secundary);
 }
 
 .link_spaced{
@@ -16,12 +19,15 @@
 
 @media screen and (min-width: 481px) {
     .link:hover{
+        color: var(--color-main);
+    }
+    .detach:hover{
         color: var(--color);
     }
 }
 
 .link:active{
-    color: var(--color-main);
+    color: var(--color-basic);
 
     transition: all .1s ease;
 }
