@@ -21,8 +21,6 @@ export default function Header({setTheme}){
     const [user, setUser] = useState({});
 
     const [menu, setMenu] = useState("slide_out");
-    const menuRef = useRef(null);
-    const menuIconRef = useRef(null);
 
     const [loading, setLoading] = useState(false);
     const [onAlert, setOnAlert] = useState({});
@@ -90,18 +88,10 @@ export default function Header({setTheme}){
         user.theme = onTheme;
     };
 
-
-    useEffect(() => {
-        const handleOutsideScroll = () => setMenu("slide_out");
-        document.addEventListener('scroll', handleOutsideScroll);
-        return () => document.removeEventListener('scroll', handleOutsideScroll);
-    }, []);
-
-    const activeMenu = () => menu == "slide_in" ? setMenu("slide_out") : setMenu("slide_in");
-
+    const menuControl = () => menu == "slide_in" ? setMenu("slide_out") : setMenu("slide_in");
+    const menuOf = () => setMenu("slide_out");
 
     const settings = () => router.push("/home/setting");
-
 
     function logout(){
         db.get("/logout").then((res) => {
@@ -118,13 +108,13 @@ export default function Header({setTheme}){
 
             <Link className={styles.logo} href={"/home"}><Logo /></Link>
 
-            <div onClick={activeMenu} ref={menuIconRef} className={`${styles.menu_icon} ${styles.icon}`}>
+            <div onClick={menuControl} className={`${styles.menu_icon} ${styles.icon}`}>
                 <HiMenu />
             </div>
 
-            <section ref={menuRef} className={`${styles.menu} ${styles[menu]}`} >
+            <section onMouseLeave={menuOf} className={`${styles.menu} ${styles[menu]}`} >
                 <header>
-                    <IoClose onClick={activeMenu} className={styles.icon} />
+                    <IoClose onClick={menuControl} className={styles.icon} />
                     <h4>Oi {user.name}!</h4>
                 </header>
                 <nav>
