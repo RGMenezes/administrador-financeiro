@@ -1,0 +1,14 @@
+.form_container{
+    max-width: 400px;
+    
+    margin: auto;
+    padding: 50px 10px 150px 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 70px;
+}
+
+.fieldset{
+    border: none;
+}
