@@ -1,4 +1,5 @@
 "use client"
+import db from "@/api/db";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
@@ -26,8 +27,8 @@ export default function Data(){
 
     const addInvestments = () => setContInvestments([...contInvestments, `investment_${contInvestments.length + 1}`]);
     const remInvestments = () => contInvestments.length <= 1 ? setContInvestments(["investment_1"]) : setContInvestments(arrayStatePop(contInvestments));
-    const addExpenses = () => setContExpenses([...contExpenses, `investment_${contExpenses.length + 1}`]);
-    const remExpenses = () => contExpenses.length <= 1 ? setContExpenses(["investment_1"]) : setContExpenses(arrayStatePop(contExpenses));
+    const addExpenses = () => setContExpenses([...contExpenses, `expenses_${contExpenses.length + 1}`]);
+    const remExpenses = () => contExpenses.length <= 1 ? setContExpenses(["expenses_1"]) : setContExpenses(arrayStatePop(contExpenses));
     const arrayStatePop = (array) => {
         let newArray = [];
         for(let element = 0; element < array.length - 1; element++ ) newArray.push(array[element]);
@@ -36,6 +37,11 @@ export default function Data(){
 
     function submit(e){
         e.preventDefault();
+
+        const arrayInvestments = contInvestments.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
+        const arrayExpenses = contExpenses.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
+
+        console.log(arrayInvestments, arrayExpenses);
 
     };
 
@@ -52,14 +58,14 @@ export default function Data(){
 
                     <section className={styles.amount_container}>
                         <div className={styles.container_x}>
-                            <BsArrowLeftCircleFill className={styles.icon} onClick={remInvestments} />
+                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onClick={remInvestments} />
                             <p>{contInvestments.length}</p>
-                            <BsArrowRightCircleFill className={styles.icon} onClick={addInvestments} />
+                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onClick={addInvestments} />
                         </div>
                     </section>
 
                     {contInvestments.map((element) => 
-                        <div key={element}>
+                        <div className={styles.data_container} key={element}>
                             <InputText
                                 text="Nome"
                                 type="text"
@@ -84,14 +90,14 @@ export default function Data(){
 
                     <section className={styles.amount_container}>
                         <div className={styles.container_x}>
-                            <BsArrowLeftCircleFill className={styles.icon} onClick={remExpenses} />
+                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onClick={remExpenses} />
                             <p>{contExpenses.length}</p>
-                            <BsArrowRightCircleFill className={styles.icon} onClick={addExpenses} />
+                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onClick={addExpenses} />
                         </div>
                     </section>
 
                     {contExpenses.map((element) => 
-                        <div key={element}>
+                        <div className={styles.data_container} key={element}>
                             <InputText
                                 text="Nome"
                                 type="text"

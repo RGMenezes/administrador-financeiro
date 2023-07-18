@@ -1,3 +1,13 @@
+@keyframes scale_in {
+    from{
+        transform: scale(0) translate(0px, -100%);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+
+
 .form_container{
     max-width: 400px;
     
@@ -65,4 +75,8 @@
     justify-content: space-around;
     align-items: center;
     gap: 20px;
+}
+
+.data_container{
+    animation: scale_in .3s;
 }
