@@ -48,15 +48,13 @@ export default function Data(){
                 <h1>Registrar dados</h1>
 
                 <fieldset className={styles.fieldset} >
-                    <h2>Investimentos</h2>
+                    <legend>Investimentos</legend>
 
-                    <legend></legend>
-
-                    <section>
-                        <div>
-                            <BsArrowLeftCircleFill onClick={remInvestments} />
+                    <section className={styles.amount_container}>
+                        <div className={styles.container_x}>
+                            <BsArrowLeftCircleFill className={styles.icon} onClick={remInvestments} />
                             <p>{contInvestments.length}</p>
-                            <BsArrowRightCircleFill onClick={addInvestments} />
+                            <BsArrowRightCircleFill className={styles.icon} onClick={addInvestments} />
                         </div>
                     </section>
 
@@ -82,15 +80,13 @@ export default function Data(){
                 </fieldset>
 
                 <fieldset className={styles.fieldset} >
-                    <h2>Despesas</h2>
+                    <legend>Despesas</legend>
 
-                    <legend></legend>
-
-                    <section>
-                        <div>
-                            <BsArrowLeftCircleFill onClick={remExpenses} />
+                    <section className={styles.amount_container}>
+                        <div className={styles.container_x}>
+                            <BsArrowLeftCircleFill className={styles.icon} onClick={remExpenses} />
                             <p>{contExpenses.length}</p>
-                            <BsArrowRightCircleFill onClick={addExpenses} />
+                            <BsArrowRightCircleFill className={styles.icon} onClick={addExpenses} />
                         </div>
                     </section>
 
@@ -115,7 +111,7 @@ export default function Data(){
                     )}
                 </fieldset>
 
-                <div>
+                <div className={styles.container_x}>
                     <LinkText 
                         text="Voltar ao início"
                         to="/home"
