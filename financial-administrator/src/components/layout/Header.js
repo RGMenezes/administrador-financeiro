@@ -108,13 +108,13 @@ export default function Header({setTheme}){
 
             <Link className={styles.logo} href={"/home"}><Logo /></Link>
 
-            <div onClick={menuControl} className={`${styles.menu_icon} ${styles.icon}`}>
+            <div tabIndex={0} onFocus={menuControl} onClick={menuControl} className={`${styles.menu_icon} ${styles.icon}`}>
                 <HiMenu />
             </div>
 
             <section onMouseLeave={menuOf} className={`${styles.menu} ${styles[menu]}`} >
                 <header>
-                    <IoClose onClick={menuControl} className={styles.icon} />
+                    <IoClose tabIndex={0} onKeyDown={(e) => e.key == "Enter" && menuOf()} onClick={menuControl} className={styles.icon} />
                     <h4>Oi {user.name}!</h4>
                 </header>
                 <nav>
@@ -132,15 +132,15 @@ export default function Header({setTheme}){
                     </ul>
                 </nav>
                 <footer>
-                    <IoSettingsSharp onClick={settings} className={styles.icon} />
+                    <IoSettingsSharp tabIndex={0} onKeyDown={(e) => e.key == "Enter" && settings()} onClick={settings} className={styles.icon} />
 
                     {onTheme ? 
-                        <HiMoon onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} /> 
+                        <HiMoon tabIndex={0} onKeyDown={(e) => e.key == "Enter" && changeTheme()} onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} /> 
                     : 
-                        <HiSun onClick={changeTheme} className={`${styles.icon} ${styles[fadeThemeDark]}`} />
+                        <HiSun tabIndex={0} onKeyDown={(e) => e.key == "Enter" && changeTheme()} onClick={changeTheme} className={`${styles.icon} ${styles[fadeThemeDark]}`} />
                     }
                     
-                    <HiLogout onClick={logout} className={styles.icon} />
+                    <HiLogout tabIndex={0} onKeyDown={(e) => e.key == "Enter" && logout()} onClick={logout} className={styles.icon} />
                 </footer>
             </section>
         </header>
