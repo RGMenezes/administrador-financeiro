@@ -37,13 +37,16 @@ export default function Data(){
 
     function submit(e){
         e.preventDefault();
+        setLoading(true);
 
         const arrayInvestments = contInvestments.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
         const arrayExpenses = contExpenses.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
 
-        db.post("register/data").then((res) => {
-            console.log(res.data[0].message.content)
-        }).catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`));
+        db.post("register/data", {investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
+            console.log(res.data);
+        })
+        .catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`))
+        .finally(() => setLoading(false));
 
     };
 
