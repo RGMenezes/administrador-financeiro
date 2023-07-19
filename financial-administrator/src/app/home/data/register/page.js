@@ -41,7 +41,9 @@ export default function Data(){
         const arrayInvestments = contInvestments.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
         const arrayExpenses = contExpenses.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
 
-        console.log(arrayInvestments, arrayExpenses);
+        db.post("register/data").then((res) => {
+            console.log(res.data[0].message.content)
+        }).catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`));
 
     };
 
@@ -58,9 +60,9 @@ export default function Data(){
 
                     <section className={styles.amount_container}>
                         <div className={styles.container_x}>
-                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onClick={remInvestments} />
+                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && remInvestments()} onClick={remInvestments} />
                             <p>{contInvestments.length}</p>
-                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onClick={addInvestments} />
+                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && addInvestments()} onClick={addInvestments} />
                         </div>
                     </section>
 
@@ -90,9 +92,9 @@ export default function Data(){
 
                     <section className={styles.amount_container}>
                         <div className={styles.container_x}>
-                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onClick={remExpenses} />
+                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && remExpenses()} onClick={remExpenses} />
                             <p>{contExpenses.length}</p>
-                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onClick={addExpenses} />
+                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && addExpenses()} onClick={addExpenses} />
                         </div>
                     </section>
 
