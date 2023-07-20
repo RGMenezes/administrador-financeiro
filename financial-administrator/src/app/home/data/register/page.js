@@ -1,6 +1,7 @@
 "use client"
 import db from "@/api/db";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 import Loading from "@/components/system/Loading";
@@ -12,6 +13,8 @@ import LinkText from "@/components/system/LinkText";
 import Button from "@/components/form/Button";
 
 export default function Data(){
+
+    const router = useRouter()
 
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
@@ -39,11 +42,14 @@ export default function Data(){
         e.preventDefault();
         setLoading(true);
 
-        const arrayInvestments = contInvestments.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
-        const arrayExpenses = contExpenses.map(element => [e.target[element][0].value, parseInt(e.target[element][1].value)]);
+        const arrayInvestments = contInvestments.map(element => [e.target[`Text_${element}`].value, parseInt(e.target[`Number_${element}`].value)]);
+        const arrayExpenses = contExpenses.map(element => [e.target[`Text_${element}`].value, parseInt(e.target[`Number_${element}`].value)]);
 
         db.post("register/data", {investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
-            console.log(res.data);
+            setOnAlert(res.data);
+            if(res.data.type == "success"){
+                router.push(res.data.redirect);
+            };
         })
         .catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`))
         .finally(() => setLoading(false));
@@ -75,14 +81,14 @@ export default function Data(){
                                 text="Nome"
                                 type="text"
                                 placeholder="Nome do investimento"
-                                id={element}
+                                id={`Text_${element}`}
                                 maxLenght={20}
                                 required={true}
                             />
                             <InputNumber 
                                 text="Valor"
                                 placeholder="Valor do investimento"
-                                id={element}
+                                id={`Number_${element}`}
                                 min={0}
                                 required={true}
                             />
@@ -107,14 +113,14 @@ export default function Data(){
                                 text="Nome"
                                 type="text"
                                 placeholder="Nome do investimento"
-                                id={element}
+                                id={`Text_${element}`}
                                 maxLenght={20}
                                 required={true}
                             />
                             <InputNumber 
                                 text="Valor"
                                 placeholder="Valor do investimento"
-                                id={element}
+                                id={`Number_${element}`}
                                 min={0}
                                 required={true}
                             />
