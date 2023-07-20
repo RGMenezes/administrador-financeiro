@@ -1,0 +1,61 @@
+.container{
+    min-height: 100vh;
+
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr) auto;
+    grid-template-areas: 'summary summary summary' 'expense expense goal' 'investment investment goal' 'tips tips tips';
+}
+
+.container_data_register{
+    min-height: 80vh;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.summary{
+    grid-area: summary;
+    background-color: red;
+}
+
+.expense{
+    grid-area: expense;
+    background-color: yellow;
+}
+
+.investment{
+    grid-area: investment;
+    background-color: aqua;
+}
+
+.goal{
+    grid-area: goal;
+    background-color: blue;
+}
+
+.tips{
+    height: fit-content;
+    padding: 50px 10px;
+
+    grid-area: tips;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+
+    overflow: auto;
+}
+.card_tips{
+    min-width: 300px;
+
+    text-align: center;
+}
+.card_tips p{
+    font-size: 0.8em;
+}
