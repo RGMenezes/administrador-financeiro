@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import Loading from "@/components/system/Loading";
 import AlertBox from "@/components/system/AlertBox";
 import LinkText from "@/components/system/LinkText";
+import Sectors from "@/components/graph/Sectors";
 
 export default function Home(){
 
@@ -43,6 +44,11 @@ export default function Home(){
                 <div className={styles.container}>
                     <article className={styles.summary} >
                         resumo
+
+                        <Sectors 
+                            data={userData.investment}
+                            colorTheme={"hot"}
+                        />
                     </article>
 
                     <article className={styles.expense} >
@@ -59,7 +65,7 @@ export default function Home(){
 
                     <aside className={styles.tips} >
                         {userData.guidance.map(element => element != userData.guidance[0] && 
-                        (<section className={styles.card_tips}>
+                        (<section key={element} className={styles.card_tips}>
                             <p>{element}</p>
                         </section>))}
                     </aside>
