@@ -1,0 +1,36 @@
+.subtitle{
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.list{
+    padding: 25px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    list-style: none;
+    gap: 10px;
+}
+
+.list_element{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 5px;
+    align-items: center;
+}
+
+.list_text{
+    font: normal normal .8em var(--font);
+    color: var(--color);
+    line-height: 1.1em;
+}
+.list_text strong{
+    font-weight: 600;
+}
+
+.icon{
+    border-radius: 100%;
+
+    font-size: 1em;
+}

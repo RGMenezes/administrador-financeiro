@@ -7,8 +7,9 @@ import styles from "./page.module.css";
 import Loading from "@/components/system/Loading";
 import AlertBox from "@/components/system/AlertBox";
 import LinkText from "@/components/system/LinkText";
-import GraphSectors from "@/components/graph/Sectors";
-import GraphColumns from "@/components/graph/Columns";
+import GraphSectors from "@/components/graph/GraphSectors";
+import GraphColumns from "@/components/graph/GraphColumns";
+import GraphSubtitle from "@/components/graph/GraphSubtitle";
 
 export default function Home(){
 
@@ -55,12 +56,18 @@ export default function Home(){
                             colorTheme={"green"}
                         />
                         <GraphColumns
-                            data={[...userData.expense]}
+                            data={userData.expense}
                         />
                     </article>
 
                     <article className={styles.expense} >
                         despesas
+                        
+                        <GraphSubtitle
+                            data={userData.expense}
+                            colorTheme="red"
+                            graph="columns"
+                        />
                     </article> 
 
                     <article className={styles.investment} >
