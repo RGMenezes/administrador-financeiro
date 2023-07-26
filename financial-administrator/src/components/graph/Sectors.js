@@ -1,39 +1,14 @@
-import styles from "./Sectors.module.css";
+import styles from "./Style.module.css";
 
-export default function Sectors({ data, colorTheme}){
+export default function Sectors({ data, colorTheme = "blue"}){
 
-    const colors = (() => {
-        const getRandomColor = () => {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            
-            if(colorTheme == "hot"){
-                color += "FF";
-                for (let i = 0; i < 4; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                };
-                return color;
-
-            }else if(colorTheme == "cold"){
-                for (let i = 0; i < 4; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                };
-                color += "FF";
-                return color;
-
-            }else{
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                };
-                return color;
-            };
-        };
-
-        return data.map(item => item = getRandomColor());
-
-    })();
-
-    console.log(colors)
+    const colors = {
+        red: ['#FF4D4D', '#FF8080', '#FFB2B2', '#FFD6D6'],
+        green: ['#00CC66', '#66FF99', '#B2FFCC', '#E6FFED'],
+        blue: ['#0099FF', '#66B2FF', '#B2D6FF', '#E6F2FF'],
+        hot: ['#FF0000', '#FF5500', '#FFAA00', '#FFD400'],
+        cold: ['#00FFFF', '#66FFFF', '#B2FFFF', '#E6FFFF']
+    };
 
     const percentageData = (() => {
         const total = data.reduce((acc, item) => acc + item[1], 0);
@@ -82,18 +57,18 @@ export default function Sectors({ data, colorTheme}){
 
             return (
                 <path
-                key={index}
-                d={pathData}
-                fill={colors[index % colors.length]}
-                strokeWidth="1"
-                stroke="#fff"
+                    key={index}
+                    d={pathData}
+                    fill={colors[colorTheme][index % colors[colorTheme].length]}
+                    strokeWidth="1"
+                    className={styles.graph}
                 />
             );
         });
     };
 
     return (
-        <svg viewBox="0 0 100 100" width="200" height="200">
+        <svg viewBox="0 0 100 100" className={styles.container}>
             {createSegments()}
         </svg>
     );

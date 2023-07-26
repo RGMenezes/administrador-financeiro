@@ -20,22 +20,21 @@
 
 .summary{
     grid-area: summary;
-    background-color: red;
+
+    display: grid;
+    gap: 10px;
 }
 
 .expense{
     grid-area: expense;
-    background-color: yellow;
 }
 
 .investment{
     grid-area: investment;
-    background-color: aqua;
 }
 
 .goal{
     grid-area: goal;
-    background-color: blue;
 }
 
 .tips{

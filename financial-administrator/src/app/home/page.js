@@ -7,7 +7,8 @@ import styles from "./page.module.css";
 import Loading from "@/components/system/Loading";
 import AlertBox from "@/components/system/AlertBox";
 import LinkText from "@/components/system/LinkText";
-import Sectors from "@/components/graph/Sectors";
+import GraphSectors from "@/components/graph/Sectors";
+import GraphColumns from "@/components/graph/Columns";
 
 export default function Home(){
 
@@ -45,9 +46,16 @@ export default function Home(){
                     <article className={styles.summary} >
                         resumo
 
-                        <Sectors 
+                        <GraphSectors 
+                            data={userData.expense}
+                            colorTheme={"red"}
+                        />
+                        <GraphSectors 
                             data={userData.investment}
-                            colorTheme={"hot"}
+                            colorTheme={"green"}
+                        />
+                        <GraphColumns
+                            data={[...userData.expense]}
                         />
                     </article>
 
