@@ -6,12 +6,11 @@ export default function TextArea({text, maxLength, minLength, id, rows = 1}) {
             className={styles.textarea}
             id={id}
             name={id}
+            defaultValue={text}
             minLength={minLength}
             maxLength={maxLength}
             rows={rows}
             required
-        >
-            {text}
-        </textarea>
+        ></textarea>
     );
 };

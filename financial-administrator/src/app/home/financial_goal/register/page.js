@@ -20,7 +20,13 @@ export default function FinancialGoalRegister() {
     const addGoal = () => setGoal([...goal, `goal_${goal.length + 1}`]);
     const remGoal = () => goal.length <= 1 ? setGoal(["goal_1"]) : setGoal(goal.splice(0, goal.length - 1));
 
-    useEffect(() => console.log(goal), [goal]);
+    function submit(e){
+        e.preventDefault();
+
+        console.log(e);
+    };
+
+    // useEffect(() => console.log(goal), [goal]);
 
     return(
         <>
