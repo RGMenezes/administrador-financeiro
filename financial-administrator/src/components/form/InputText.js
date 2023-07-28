@@ -1,20 +1,17 @@
 import styles from "./InputText.module.css";
 
-export default function Input({type, text, placeholder, id, minLength, maxLenght, required = false, autoComplete}){
-
-    const rqd = required;
-
+export default function Input({type, text, placeholder, id, minLength, maxLength, required = false, autoComplete}){
     return(
         <div className={styles.container} >
             <label htmlFor={id}>{text}: </label>
-            {rqd ? 
+            {required ? 
                 <input 
                     type={type}
                     id={id} 
                     name={id}
                     placeholder={placeholder}
                     minLength={minLength}
-                    maxLength={maxLenght}
+                    maxLength={maxLength}
                     autoComplete={autoComplete}
                     required
                 />
@@ -25,7 +22,7 @@ export default function Input({type, text, placeholder, id, minLength, maxLenght
                     name={id}
                     placeholder={placeholder}
                     minLength={minLength}
-                    maxLength={maxLenght}
+                    maxLength={maxLength}
                     autoComplete={autoComplete}
                 />
             }
