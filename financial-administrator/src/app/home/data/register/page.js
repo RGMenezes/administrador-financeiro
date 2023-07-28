@@ -12,7 +12,7 @@ import InputNumber from "@/components/form/InputNumber";
 import LinkText from "@/components/system/LinkText";
 import Button from "@/components/form/Button";
 
-export default function Data(){
+export default function DataRegister(){
 
     const router = useRouter()
 

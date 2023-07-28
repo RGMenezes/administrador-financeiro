@@ -17,17 +17,23 @@ export default function Home(){
     const [onAlert, setOnAlert] = useState({});
 
     const [userData, setUserData] = useState(false);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         setLoading(true);
 
+        db.get("/user").then((res) => {
+            setUser(res.data.data);
+        }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
+        .finally(() => setLoading(false));
+
         db.get("/data").then((res) => {
             setUserData(res.data.data);
-            console.log(res.data.data);
-
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
     }, []);
+
+    const totalDataUser = (arrayData) => arrayData.map(item => item = item[1]).reduce((acc, cur) => acc + cur, 0); 
 
     return(
         <>
@@ -45,23 +51,21 @@ export default function Home(){
             :
                 <div className={styles.container}>
                     <article className={styles.summary} >
-                        resumo
+                        <h2>{user.name}</h2>
+                        <ul>
+                            <li><strong>Salário: R${user.wage}</strong></li>
+                            <li>Investimentos: R${`${totalDataUser(userData.investment)}`}</li>
+                            <li>Despesas: R${`${totalDataUser(userData.expense)}`}</li>
+                        </ul>
 
-                        <GraphSectors 
-                            data={userData.expense}
-                            colorTheme={"red"}
-                        />
-                        <GraphSectors 
-                            data={userData.investment}
-                            colorTheme={"green"}
-                        />
-                        <GraphColumns
-                            data={userData.expense}
+                        <GraphSubtitle 
+                            data={[["Investimentos", totalDataUser(userData.investment)], ["Despesas", totalDataUser(userData.expense)]]}
+                            graph="sectors"
                         />
                     </article>
 
                     <article className={styles.expense} >
-                        despesas
+                        <h3>Despesas</h3>
                         
                         <GraphSubtitle
                             data={userData.expense}
@@ -71,11 +75,32 @@ export default function Home(){
                     </article> 
 
                     <article className={styles.investment} >
-                        investimentos
+                        <h3>Investimentos</h3>
+                        
+                        <GraphSubtitle
+                            data={userData.investment}
+                            colorTheme="green"
+                            graph="columns"
+                        />
                     </article>
 
                     <aside className={styles.goal} >
-                        metas financeiras
+                        <h4>Metas</h4>
+
+                        {!userData.financialGoal[0] === true ? 
+                            <div>
+                                <p>Não há metas</p>
+                                <LinkText
+                                    text="Criar nova meta"
+                                    to="/home/financial_goal/register"
+                                    detach={true}
+                                />
+                            </div>
+                        : 
+                            <div>
+                                A definir
+                            </div>
+                        }
                     </aside>
 
                     <aside className={styles.tips} >

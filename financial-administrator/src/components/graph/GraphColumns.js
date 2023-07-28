@@ -22,7 +22,6 @@ export default function Columns({data, colorTheme = 'blue'}){
             {percentageData.map((item, index) => {
                 const barWidth = 270 / percentageData.length;
                 const barHeight = 100 - (400 / item[1]);
-                console.log(barHeight)
                 const x = 33 + index * 330 / percentageData.length;
                 const y = 300 - barHeight;
         
