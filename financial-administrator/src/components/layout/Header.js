@@ -121,7 +121,9 @@ export default function Header({setTheme}){
                     <ul>
                         <li><LinkText to="/home/expenses/add" text="Adicionar despesas" spaced={true} /></li>
                         <li><LinkText to="/home/expenses" text="Visualizar despesas" spaced={true} /></li>
-                        <li><LinkText to="/home/financial_goal/add" text="Criar meta financeira" spaced={true} /></li>
+                        <li><LinkText to="/home/investment/add" text="Adicionar investimentos" spaced={true} /></li>
+                        <li><LinkText to="/home/investment" text="Visualizar investimentos" spaced={true} /></li>
+                        <li><LinkText to="/home/financial_goal/register" text="Criar meta financeira" spaced={true} /></li>
                         <li><LinkText to="/home/financial_goal" text="Visualizar metas" spaced={true} /></li>
                         <li><LinkText to="/home/data/edit" text="Atualizar dados" spaced={true} /></li>
                     </ul>

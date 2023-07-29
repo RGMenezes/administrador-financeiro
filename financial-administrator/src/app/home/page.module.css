@@ -1,11 +1,27 @@
 .container{
-    min-height: 100vh;
+    padding: 100px 0px;
 
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 100px;
+}
 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr) auto;
-    grid-template-areas: 'summary summary summary' 'expense expense goal' 'investment investment goal' 'tips tips tips';
+.container h4{
+    text-align: center;
+}
+
+.graph{
+    max-width: 300px;
+    max-height: 500px;
+}
+
+.row_x{
+    padding: 20px 10px;
+    overflow-x: auto;
+
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 20px;
 }
 
 .container_data_register{
@@ -21,37 +37,112 @@
 .summary{
     grid-area: summary;
 
-    display: grid;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
     gap: 10px;
 }
+.summary_profile{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 30px;
 
+    text-align: center;
+}
+.summary_profile ul{
+    font: normal normal 1em var(--font);
+    color: var(--color);
+    list-style: none;
+}
+
+
+
+.container_goal_register{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.goal{
+    padding: 0px 10px;
+ 
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 40px;
+}
+.card_goal{
+    min-width: 150px;
+    min-height: 200px;
+
+    padding: 20px 10px;
+    overflow: hidden;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+
+    border-radius: 15px;
+    box-shadow: 0px 0px 3px var(--color-basic);
+}
+.card_goal p{
+    font-size: 0.8em;
+    text-align: center;
+}
+
+
+
+
+.financial{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 150px 40px;
+}
 .expense{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 50px;
+
     grid-area: expense;
+    justify-self: center;
 }
 
 .investment{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 50px;
+
     grid-area: investment;
+    justify-self: center;
 }
 
-.goal{
-    grid-area: goal;
-}
+
 
 .tips{
-    height: fit-content;
-    padding: 50px 10px;
-
-    grid-area: tips;
+    padding: 0px 10px;
+ 
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-
-    overflow: auto;
+    flex-flow: column nowrap;
+    gap: 40px;
 }
 .card_tips{
     min-width: 300px;
+
+    padding: 20px 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    border-radius: 15px;
+    box-shadow: 0px 0px 3px var(--color-basic);
 
     text-align: center;
 }

@@ -42,24 +42,24 @@
 }
 
 h1{
-    font: normal 800 2em var(--font);
+    font: normal 800 2.3em var(--font);
     color: var(--color);
     text-align: center;
 }
 h2{
-    font: normal 800 1.6em var(--font);
+    font: normal 800 1.7em var(--font);
     color: var(--color);
 }
 h3{
-    font: normal 600 1.4em var(--font);
+    font: normal 600 1.5em var(--font);
     color: var(--color);
 }
 h4{
-    font: normal 600 1.2em var(--font);
+    font: normal 600 1.3em var(--font);
     color: var(--color);
 }
 
 p{
-    font: normal normal 1em var(--font);
+    font: normal normal 1.1em var(--font);
     color: var(--color);
 }

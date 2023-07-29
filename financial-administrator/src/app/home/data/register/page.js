@@ -34,7 +34,7 @@ export default function DataRegister(){
     const remExpenses = () => contExpenses.length <= 1 ? setContExpenses(["expenses_1"]) : setContExpenses(arrayStatePop(contExpenses));
     const arrayStatePop = (array) => {
         let newArray = [];
-        for(let element = 0; element < array.length - 1; element++ ) newArray.push(array[element]);
+        for(let item = 0; item < array.length - 1; item++ ) newArray.push(array[item]);
         return newArray;
     };
 
@@ -42,8 +42,8 @@ export default function DataRegister(){
         e.preventDefault();
         setLoading(true);
 
-        const arrayInvestments = contInvestments.map(element => [e.target[`Text_${element}`].value, parseInt(e.target[`Number_${element}`].value)]);
-        const arrayExpenses = contExpenses.map(element => [e.target[`Text_${element}`].value, parseInt(e.target[`Number_${element}`].value)]);
+        const arrayInvestments = contInvestments.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
+        const arrayExpenses = contExpenses.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
         db.post("register/data", {investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
             setOnAlert(res.data);
@@ -75,20 +75,20 @@ export default function DataRegister(){
                         </div>
                     </section>
 
-                    {contInvestments.map((element) => 
-                        <div className={styles.data_container} key={element}>
+                    {contInvestments.map((item) => 
+                        <div className={styles.data_container} key={item}>
                             <InputText
                                 text="Nome"
                                 type="text"
                                 placeholder="Nome do investimento"
-                                id={`Text_${element}`}
+                                id={`Text_${item}`}
                                 maxLenght={20}
                                 required={true}
                             />
                             <InputNumber 
                                 text="Valor"
                                 placeholder="Valor do investimento"
-                                id={`Number_${element}`}
+                                id={`Number_${item}`}
                                 min={0}
                                 required={true}
                             />
@@ -107,20 +107,20 @@ export default function DataRegister(){
                         </div>
                     </section>
 
-                    {contExpenses.map((element) => 
-                        <div className={styles.data_container} key={element}>
+                    {contExpenses.map((item) => 
+                        <div className={styles.data_container} key={item}>
                             <InputText
                                 text="Nome"
                                 type="text"
                                 placeholder="Nome do investimento"
-                                id={`Text_${element}`}
+                                id={`Text_${item}`}
                                 maxLenght={20}
                                 required={true}
                             />
                             <InputNumber 
                                 text="Valor"
                                 placeholder="Valor do investimento"
-                                id={`Number_${element}`}
+                                id={`Number_${item}`}
                                 min={0}
                                 required={true}
                             />
