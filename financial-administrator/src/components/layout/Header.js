@@ -119,9 +119,9 @@ export default function Header({setTheme}){
                 </header>
                 <nav>
                     <ul>
-                        <li><LinkText to="/home/expenses/add" text="Adicionar despesas" spaced={true} /></li>
+                        <li><LinkText to="/home/expenses/register" text="Adicionar despesas" spaced={true} /></li>
                         <li><LinkText to="/home/expenses" text="Visualizar despesas" spaced={true} /></li>
-                        <li><LinkText to="/home/investment/add" text="Adicionar investimentos" spaced={true} /></li>
+                        <li><LinkText to="/home/investment/register" text="Adicionar investimentos" spaced={true} /></li>
                         <li><LinkText to="/home/investment" text="Visualizar investimentos" spaced={true} /></li>
                         <li><LinkText to="/home/financial_goal/register" text="Criar meta financeira" spaced={true} /></li>
                         <li><LinkText to="/home/financial_goal" text="Visualizar metas" spaced={true} /></li>

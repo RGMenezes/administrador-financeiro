@@ -19,17 +19,12 @@ export default function DataRegister(){
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const [contInvestments, setContInvestments] = useState([]);
     const [contExpenses, setContExpenses] = useState([]);
 
     useEffect(() => {
-        setContInvestments(["investment_1"]);
         setContExpenses(["expenses_1"]);
     }, []);
 
-
-    const addInvestments = () => setContInvestments([...contInvestments, `investment_${contInvestments.length + 1}`]);
-    const remInvestments = () => contInvestments.length <= 1 ? setContInvestments(["investment_1"]) : setContInvestments(arrayStatePop(contInvestments));
     const addExpenses = () => setContExpenses([...contExpenses, `expenses_${contExpenses.length + 1}`]);
     const remExpenses = () => contExpenses.length <= 1 ? setContExpenses(["expenses_1"]) : setContExpenses(arrayStatePop(contExpenses));
     const arrayStatePop = (array) => {
@@ -42,10 +37,9 @@ export default function DataRegister(){
         e.preventDefault();
         setLoading(true);
 
-        const arrayInvestments = contInvestments.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
         const arrayExpenses = contExpenses.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
-        db.post("register/data", {investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
+        db.post("register/expenses", arrayExpenses).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 router.push(res.data.redirect);
@@ -62,39 +56,7 @@ export default function DataRegister(){
             <AlertBox alert={onAlert} />
 
             <form className={styles.form_container} onSubmit={submit}>
-                <h1>Registrar dados</h1>
-
-                <fieldset className={styles.fieldset} >
-                    <legend>Investimentos</legend>
-
-                    <section className={styles.amount_container}>
-                        <div className={styles.container_x}>
-                            <BsArrowLeftCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && remInvestments()} onClick={remInvestments} />
-                            <p>{contInvestments.length}</p>
-                            <BsArrowRightCircleFill tabIndex="0" className={styles.icon} onKeyDown={(e) => e.key == "Enter" && addInvestments()} onClick={addInvestments} />
-                        </div>
-                    </section>
-
-                    {contInvestments.map((item) => 
-                        <div className={styles.data_container} key={item}>
-                            <InputText
-                                text="Nome"
-                                type="text"
-                                placeholder="Nome do investimento"
-                                id={`Text_${item}`}
-                                maxLenght={20}
-                                required={true}
-                            />
-                            <InputNumber 
-                                text="Valor"
-                                placeholder="Valor do investimento"
-                                id={`Number_${item}`}
-                                min={0}
-                                required={true}
-                            />
-                        </div>
-                    )}
-                </fieldset>
+                <h1>Adicionar despesas</h1>
 
                 <fieldset className={styles.fieldset} >
                     <legend>Despesas</legend>
@@ -130,12 +92,12 @@ export default function DataRegister(){
 
                 <div className={styles.container_x}>
                     <LinkText 
-                        text="Voltar ao início"
+                        text="Voltar"
                         to="/home"
                     />
 
                     <Button
-                        text="Registrar dados"
+                        text="Adicionar"
                         type="submit"
                     />
                 </div>

@@ -20,7 +20,7 @@ export default function Subtitle({data, colorTheme = "blue", graph}){
             {graph == "columns" && (<GraphColumns data={data} colorTheme={colorTheme} />)} 
             <ul className={styles.list}>
                 {data.map((item, index) => (
-                    <li className={styles.list_element} key={item[0]}>
+                    <li className={styles.list_element} key={`${item[0]}_${index}`}>
                         <SiElement
                             className={styles.icon}
                             style={{ color: colors[colorTheme][index % colors[colorTheme].length] }}
