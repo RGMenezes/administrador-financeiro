@@ -1,6 +1,6 @@
 import styles from "./InputText.module.css";
 
-export default function Input({type, text, placeholder, id, minLength, maxLength, required = false, autoComplete}){
+export default function Input({type, text, placeholder, id, minLength, maxLength, required = false, autoComplete, defaultValue}){
     return(
         <div className={styles.container} >
             <label htmlFor={id}>{text}: </label>
@@ -13,6 +13,7 @@ export default function Input({type, text, placeholder, id, minLength, maxLength
                     minLength={minLength}
                     maxLength={maxLength}
                     autoComplete={autoComplete}
+                    defaultValue={defaultValue}
                     required
                 />
             :   
@@ -24,6 +25,7 @@ export default function Input({type, text, placeholder, id, minLength, maxLength
                     minLength={minLength}
                     maxLength={maxLength}
                     autoComplete={autoComplete}
+                    defaultValue={defaultValue}
                 />
             }
         </div>

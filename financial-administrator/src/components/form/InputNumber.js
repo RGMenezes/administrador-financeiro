@@ -4,9 +4,9 @@ import { useState } from "react";
 
 import styles from "./InputNumber.module.css";
 
-export default function InputNumber({text, id, min, max, placeholder, required}){
+export default function InputNumber({text, id, min, max, placeholder, required, defaultValue}){
 
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(defaultValue);
 
     function handleChange(e){
         Number.isNaN(value) ? setValue('') : setValue(minMaxValue(parseInt(e.target.value)));
