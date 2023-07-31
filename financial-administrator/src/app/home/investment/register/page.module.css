@@ -1,0 +1,82 @@
+@keyframes scale_in {
+    from{
+        transform: scale(0) translate(0px, -100%);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+
+
+.form_container{
+    max-width: 400px;
+    
+    margin: auto;
+    padding: 50px 10px 150px 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 70px;
+}
+
+
+.fieldset{
+    padding-bottom: 40px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 20px;
+
+    border: none;
+}
+
+.fieldset legend{
+    font: normal 800 1.4em var(--font);
+    color: var(--color);
+    text-align: center;
+}
+
+
+.amount_container{
+    padding-top: 40px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.icon{
+    cursor: pointer;
+
+    font-size: 1.2em;
+    color: var(--color);
+
+    transition: all .3s ease;
+}
+
+@media screen and (min-width: 481px) {
+    .icon:hover{
+        transform: scale(1.2);
+    }
+}
+
+.icon:active{
+    color: var(--color-main);
+    transition: all .1s ease;
+}
+
+
+.container_x{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.data_container{
+    animation: scale_in .3s;
+}
