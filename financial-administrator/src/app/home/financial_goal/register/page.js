@@ -1,6 +1,7 @@
 'use client';
 import db from "@/api/db";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import styles from "./page.module.css";
 
@@ -12,6 +13,7 @@ import Button from "@/components/form/Button";
 import AlertBox from "@/components/system/AlertBox";
 
 export default function FinancialGoalRegister() {
+    const router = useRouter();
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -28,6 +30,9 @@ export default function FinancialGoalRegister() {
 
         db.post("/register/financial_goal", arrayGoal).then((res) => {
             setOnAlert(res.data);
+            if(res.data.type == "success"){
+                router.push(res.data.redirect);
+            };
         }).catch(err => console.error(`Erro ao conectar ao banco de dados: ${err}`))
         .finally(() => setLoading(false))
     };
