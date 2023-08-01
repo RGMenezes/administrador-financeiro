@@ -39,7 +39,7 @@ export default function DataRegister(){
 
         const arrayInvestment = contInvestment.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
-        db.post("register/investment", arrayInvestment).then((res) => {
+        db.put("register/investment", arrayInvestment).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 router.push(res.data.redirect);

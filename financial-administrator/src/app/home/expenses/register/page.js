@@ -39,7 +39,7 @@ export default function DataRegister(){
 
         const arrayExpenses = contExpenses.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
-        db.post("register/expenses", arrayExpenses).then((res) => {
+        db.put("/register/expense", arrayExpenses).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 router.push(res.data.redirect);
