@@ -123,10 +123,11 @@ export default function Home(){
                         <h4>Dicas</h4>
 
                         <div className={styles.row_x}>
-                            {userData.guidance.map(item => item != userData.guidance[0] &&
-                            (<aside key={item} className={styles.card_tips}>
-                                <p>{item}</p>
-                            </aside>))}
+                            {userData.financialReport.tips.map(item => (
+                                <aside key={item} className={styles.card_tips}>
+                                    <p>{item}</p>
+                                </aside>
+                            ))}
                         </div>
                     </section>
                 </div>
