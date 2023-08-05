@@ -16,6 +16,31 @@
     gap: 25px;
 }
 
+.form_edit{
+    width: 300px;
+    padding: 35px 20px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+    background-color: var(--color-bg);
+    border-radius: 20px;
+    box-shadow: 0px 0px 2px var(--color-basic);
+
+    transform: translate(-50%, -50%) scale(0);
+    transition: all .3s ease;
+}
+.form_edit h3{
+    text-align: center;
+}
+
 .card{
     width: 200px;
     height: 250px;
@@ -69,4 +94,8 @@
     color: var(--color-main);
 
     transition: all .1s ease;
+}
+
+.fade{
+    transform: translate(-50%, -50%) scale(1);
 }

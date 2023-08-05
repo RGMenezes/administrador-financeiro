@@ -7,16 +7,57 @@ import styles from "./page.module.css";
 import AlertBox from "@/components/system/AlertBox";
 import Loading from "@/components/system/Loading";
 import LinkText from "@/components/system/LinkText";
+import InputText from "@/components/form/InputText";
+import InputNumber from "@/components/form/InputNumber";
+import Button from "@/components/form/Button";
 
 export default function Investment(){
 
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
-
+    
     const [investment, setInvestment] = useState([]);
-
+    const [editIndex, setEditIndex] = useState(false);
+    const [fade, setFade] = useState(false);
+    
     function investmentEdit(index){
-        console.log(investment[index]);
+        if(editIndex != index){
+            setFade(false);
+            setTimeout(() => {
+                setEditIndex(false);
+                setTimeout(() => {
+                    setEditIndex(index);
+                    setTimeout(() => setFade("fade"), 1);
+                }, 100);
+            }, 300);
+        }else{
+            setEditIndex(index);
+            setTimeout(() => setFade("fade"), 1);
+        };
+    };
+    function editCancel(){
+        setFade(false);
+        setTimeout(() => setEditIndex(false), 300);
+    };
+    function editSave(e){
+        e.preventDefault();
+        setLoading(true);
+
+        const investmentCopy = investment.map((item, index) => {
+            if(index == editIndex){
+                return [e.target[`Text_${investment[index][0]}`].value, parseInt(e.target[`Number_${investment[index][0]}`].value)];
+            };
+            return item;
+        });
+
+        db.put("/edit/investment", investmentCopy).then((res) => {
+            setOnAlert(res.data);
+            if(res.data.type == "success"){
+                setInvestment(investmentCopy);
+                editCancel();
+            };
+        }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
+        .finally(() => setLoading(false));
     };
 
     function investmentDelete(index){
@@ -87,6 +128,42 @@ export default function Investment(){
                     </article>
                 ))}
             </section>
+
+            {typeof editIndex == typeof 1 && (
+                <form onSubmit={editSave} className={`${styles.form_edit} ${styles[fade]}`}>
+                    <h3><strong>Editar</strong> <br/> {investment[editIndex][0]}</h3>
+                    <div>
+                        <InputText
+                            text="Nome"
+                            type="text"
+                            placeholder="Nome da despesa"
+                            id={`Text_${investment[editIndex][0]}`}
+                            maxLenght={20}
+                            defaultValue={investment[editIndex][0]}
+                            required={true}
+                        />
+                        <InputNumber
+                            text="Valor"
+                            placeholder="Valor da despesa"
+                            id={`Number_${investment[editIndex][0]}`}
+                            min={0}
+                            defaultValue={investment[editIndex][1]}
+                            required={true}
+                        />
+                    </div>
+                    <div className={styles.row_x}>
+                        <Button 
+                            text="Cancelar"
+                            handleClick={editCancel}
+                            type="button"
+                        />
+                        <Button 
+                            text="Salvar"
+                            type="submit"
+                        />
+                    </div>
+                </form>
+            )}
         </>
     );
 };
