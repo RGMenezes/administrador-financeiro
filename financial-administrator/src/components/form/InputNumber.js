@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import styles from "./InputNumber.module.css";
 
-export default function InputNumber({text, id, min, max, placeholder, required, defaultValue}){
+export default function InputNumber({text, id, min, max, placeholder, required, defaultValue = ''}){
 
     const [value, setValue] = useState(defaultValue);
 
     function handleChange(e){
-        Number.isNaN(value) ? setValue('') : setValue(minMaxValue(parseInt(e.target.value)));
+        isNaN(e.target.value) || e.target.value == undefined ? setValue('') : setValue(minMaxValue(parseInt(e.target.value)));
 
         function minMaxValue(value){
             if(value <= min){
@@ -17,13 +17,13 @@ export default function InputNumber({text, id, min, max, placeholder, required, 
             }else if(value >= max){
                 return max;
             }else{
-                return Number.isNaN(value) ? '' : value;
+                return isNaN(value) ? '' : value;
             };
         };
     };
 
-    const increment = () => Number.isNaN(value) || value === "" ? setValue(1) : value >= max ? setValue(max) : setValue(value + 1);
-    const decrement = () => Number.isNaN(value) || value === "" ? setValue(0) : value <= min ? setValue(min) : setValue(value - 1);
+    const increment = () => isNaN(value) || value === "" || value == undefined ? setValue(1) : value >= max ? setValue(max) : setValue(value + 1);
+    const decrement = () => isNaN(value) || value === "" || value == undefined ? setValue(0) : value <= min ? setValue(min) : setValue(value - 1);
 
     return (
         <div className={styles.container}>
