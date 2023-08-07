@@ -1,4 +1,5 @@
 .link{
+    cursor: pointer;
     font: normal 600 1em var(--font);
     color: var(--color);
 

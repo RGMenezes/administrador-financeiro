@@ -42,7 +42,7 @@ export default function DataRegister(){
         db.put("/register/expense", arrayExpenses).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
-                router.push(res.data.redirect);
+                router.back();
             };
         })
         .catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`))
@@ -93,7 +93,7 @@ export default function DataRegister(){
                 <div className={styles.container_x}>
                     <LinkText 
                         text="Voltar"
-                        to="/home"
+                        type="back"
                     />
 
                     <Button
