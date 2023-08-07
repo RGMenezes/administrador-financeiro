@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
-import Loading from "@/components/system/Loading";
+import Loading from "@/components/system/Loader";
 import AlertBox from "@/components/system/AlertBox";
 import InputText from "@/components/form/InputText";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";

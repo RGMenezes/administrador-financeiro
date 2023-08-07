@@ -5,7 +5,7 @@ import db from "@/api/db";
 import styles from "./styles.module.css";
 
 import AlertBox from "@/components/system/AlertBox";
-import Loading from "@/components/system/Loading";
+import Loading from "@/components/system/Loader";
 import Logo from "../../../public/logo/logo";
 import InputText from "@/components/form/InputText";
 import InputNumber from "@/components/form/InputNumber";

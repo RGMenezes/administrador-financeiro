@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import styles from "./page.module.css";
 
-import Loading from "@/components/system/Loading";
+import Loading from "@/components/system/Loader";
 import LinkText from "@/components/system/LinkText";
 import InputNumber from "@/components/form/InputNumber";
 import InputTextArea from "@/components/form/InputTextArea";

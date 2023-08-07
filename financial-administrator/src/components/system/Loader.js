@@ -1,8 +1,8 @@
-import styles from "./Loading.module.css";
+import styles from "./Loader.module.css";
 
 import Logo from "../../../public/logo/logo";
 
-export default function Loading(){
+export default function Loader(){
     return(
         <div className={styles.container}>
             <div className={styles.logo}>

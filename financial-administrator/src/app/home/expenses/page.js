@@ -5,7 +5,7 @@ import {MdEdit, MdDelete} from "react-icons/md";
 import styles from "./page.module.css";
 
 import AlertBox from "@/components/system/AlertBox";
-import Loading from "@/components/system/Loading";
+import Loading from "@/components/system/Loader";
 import LinkText from "@/components/system/LinkText";
 import InputText from "@/components/form/InputText";
 import InputNumber from "@/components/form/InputNumber";

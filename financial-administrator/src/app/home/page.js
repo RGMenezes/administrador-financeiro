@@ -4,7 +4,7 @@ import db from "@/api/db";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
-import Loading from "@/components/system/Loading";
+import Loading from "@/components/system/Loader";
 import AlertBox from "@/components/system/AlertBox";
 import LinkText from "@/components/system/LinkText";
 import GraphSubtitle from "@/components/graph/GraphSubtitle";

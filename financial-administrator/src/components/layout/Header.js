@@ -9,7 +9,7 @@ import { HiMenu, HiLogout, HiSun, HiMoon } from "react-icons/hi";
 import {IoClose, IoSettingsSharp} from "react-icons/io5"
 import styles from "./Header.module.css";
 
-import Loading from "../system/Loading";
+import Loading from "../system/Loader";
 import AlertBox from "../system/AlertBox";
 
 import Logo from "../../../public/logo/logo";
