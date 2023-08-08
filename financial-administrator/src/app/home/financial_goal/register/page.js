@@ -76,12 +76,12 @@ export default function FinancialGoalRegister() {
 
                 <div className={styles.container_x}>
                     <LinkText 
-                        text="Voltar ao início"
-                        to="/home"
+                        text="Voltar"
+                        type="back"
                     />
 
                     <Button
-                        text="Registrar dados"
+                        text="Criar"
                         type="submit"
                     />
                 </div>
