@@ -130,7 +130,10 @@ export default function Header({setTheme}){
                     <hr/>
                     <ul>
                         <li><LinkText to="/home/financial_report" text="Relatório financeiro" spaced={true} /></li>
-                        <li><LinkText to="/home/guidance" text="Orientações" spaced={true} /></li>
+                        <li><LinkText to="/home/financial_report#Positives" text="Pontos positivos" spaced={true} /></li>
+                        <li><LinkText to="/home/financial_report#Demerits" text="Pontos negativos" spaced={true} /></li>
+                        <li><LinkText to="/home/financial_report#Improvements" text="O que melhorar?" spaced={true} /></li>
+                        <li><LinkText to="/home/financial_report#Tips" text="Dicas" spaced={true} /></li>
                     </ul>
                 </nav>
                 <footer>

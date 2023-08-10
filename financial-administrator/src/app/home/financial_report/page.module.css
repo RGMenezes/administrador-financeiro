@@ -1,0 +1,22 @@
+.container{
+    padding: 70px 10px 150px 10px;
+    
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 100px;
+}
+
+.article, .container_tips{
+    max-width: 800px;
+
+    display: flex;
+    flex-flow: column wrap;
+    gap: 20px;
+}
+
+.tips{
+    font: normal normal 1em var(--font);
+    color: var(--color);
+    list-style: circle inside;
+}

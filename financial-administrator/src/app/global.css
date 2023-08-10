@@ -60,6 +60,6 @@ h4{
 }
 
 p{
-    font: normal normal 1.1em var(--font);
+    font: normal normal 1em var(--font);
     color: var(--color);
 }
