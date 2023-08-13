@@ -50,6 +50,7 @@ export default function Header({setTheme}){
                     }, 300);
                 };
             }else{
+                console.log(req.data)
                 setOnAlert(res.data);
                 router.push(res.data.redirect);
             };
