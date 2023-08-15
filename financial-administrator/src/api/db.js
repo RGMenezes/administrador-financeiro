@@ -5,5 +5,5 @@ const apiURL = "https://api-administrador-financeiro.vercel.app/";
 
 export default axios.create({
     baseURL: apiURL || apiLocal,
-    withCredentials: true
+    withCredentials: false
 });
