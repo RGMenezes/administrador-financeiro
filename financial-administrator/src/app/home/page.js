@@ -21,6 +21,7 @@ export default function Home(){
         setLoading(true);
 
         db.get("/user").then((res) => {
+            console.log(res.data)
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
