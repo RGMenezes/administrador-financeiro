@@ -24,7 +24,6 @@ export default function Page(){
         setloding(true)
 
         db.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
-            console.log(res)
             setOnAlert(res.data);
             router.push(res.data.redirect);
         }).catch((err) => {
