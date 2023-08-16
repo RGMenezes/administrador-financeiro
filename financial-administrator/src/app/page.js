@@ -1,5 +1,5 @@
 'use client';
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 

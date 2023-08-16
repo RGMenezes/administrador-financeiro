@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 
 import { HiMenu, HiLogout, HiSun, HiMoon } from "react-icons/hi";
 import {IoClose, IoSettingsSharp} from "react-icons/io5"

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 
 import styles from "./styles.module.css";
 

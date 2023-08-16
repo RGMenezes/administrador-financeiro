@@ -1,5 +1,5 @@
 "use client";
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 import { useEffect, useState } from "react";
 
 import styles from "./page.module.css";

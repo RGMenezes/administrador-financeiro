@@ -10,7 +10,6 @@ export default function AlertBox({alert}){
 
     useEffect(() => {
         if(alert.msg){
-            console.log(alert)
             setMsg(alert.msg);
             setType(alert.type);
             setFade("fade");

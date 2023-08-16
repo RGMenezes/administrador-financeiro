@@ -1,5 +1,5 @@
 "use client";
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 import { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 

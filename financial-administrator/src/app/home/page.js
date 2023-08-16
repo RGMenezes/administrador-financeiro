@@ -1,6 +1,6 @@
 "use client";
 
-import db from "@/api/db";
+import db from "@/api/axiosApi";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
@@ -21,7 +21,6 @@ export default function Home(){
         setLoading(true);
 
         db.get("/user").then((res) => {
-            console.log(res.data)
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
