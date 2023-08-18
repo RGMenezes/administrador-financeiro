@@ -1,7 +1,7 @@
 'use client';
-import db from "@/api/axiosApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import styles from "./page.module.css";
 
@@ -15,20 +15,24 @@ import Logo from "../../public/logo/logo.js";
 
 export default function Page(){
     const [onAlert, setOnAlert] = useState({});
-    const [loading, setloding] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const router = useRouter();
 
-    async function submitLogin(e){
+    function submitLogin(e){
         e.preventDefault();
-        setloding(true)
-
-        db.post("/login", {email: e.target.email.value, password: e.target.password.value}).then((res) => {
-            setOnAlert(res.data);
-            router.push(res.data.redirect);
+        setLoading(true)
+        
+        signIn("credentials", {email: e.target.email.value, password: e.target.password.value, redirect: false}).then((res) => {
+            if(!res.error){
+                setOnAlert({type: "success", msg:"Usuário logado com sucesso!"});
+                router.push("/home");
+            }else{
+                setOnAlert({type: "error", msg: res.error});
+            };
         }).catch((err) => {
-            console.error(`Erro no banco de dados: ${err}`);
-        }).finally(() => setloding(false));
+            console.log(`Erro ao acessar o servidor: ${err}`);
+        }).finally(() => setLoading(false))
     };
 
     return (
