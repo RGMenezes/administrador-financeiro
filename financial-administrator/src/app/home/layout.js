@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from 'next-auth/react';
 
 import styles from "./layout.module.css"
 
@@ -7,7 +9,14 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 
 export default function layout({children}){
+    const route = useRouter();
+    const { data: session, status } = useSession();
     const [theme, setTheme] = useState(false);
+    useEffect(() => {
+        if(status !== "authenticated"){
+            route.push("/")
+        };
+    }, []);
 
     return(
         <div className={theme ? `${styles.bg}`: `${styles.bg} ${styles.dark}`}>

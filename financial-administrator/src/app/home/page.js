@@ -1,7 +1,8 @@
 "use client";
-
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
+import { useSession } from 'next-auth/react';
+
 import styles from "./page.module.css";
 
 import Loading from "@/components/system/Loader";
@@ -10,6 +11,7 @@ import LinkText from "@/components/system/LinkText";
 import GraphSubtitle from "@/components/graph/GraphSubtitle";
 
 export default function Home(){
+    const { data: session } = useSession();
 
     const [loading, setLoading] = useState(false);
     const [onAlert, setOnAlert] = useState({});
@@ -20,12 +22,12 @@ export default function Home(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/user").then((res) => {
+        api.post("/user").then((res) => {
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
 
-        db.get("/data").then((res) => {
+        api.POST("/data").then((res) => {
             setUserData(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
