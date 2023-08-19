@@ -1,4 +1,4 @@
-module.exports = function (index) {
+export default function profileData(index) {
     const profiles = [
         {
             Positives: "Parabéns por adotar uma abordagem equilibrada entre seus investimentos e despesas. Manter seus investimentos e despesas dentro do seu salário é um sinal de responsabilidade financeira. Isso mostra que você está comprometido em viver dentro das suas possibilidades enquanto busca o crescimento do seu patrimônio.",

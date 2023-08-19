@@ -1,6 +1,6 @@
-const profileData = require("./profileData");
+import profileData from "./profileData";
 
-module.exports = function(wage, investment, expense){
+export default function Administrator(wage, investment, expense){
     function Admin(userTotal, userPercentage){
 
         if (userPercentage.aboutSalary[0] <= 50 && userPercentage.aboutSalary[1] <= 50) {

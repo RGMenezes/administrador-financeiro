@@ -5,51 +5,36 @@ import User from "@/api/model/User";
 
 import Response from "@/api/helper/Response";
 
-export async function POST(req){
-    Database();
-    const res = NextResponse;
-    const {userName, email, password, wage} = await req.json();
+export async function POST(req) {
+  Database();
+  const res = NextResponse;
+  const { userName, email, password, wage } = await req.json();
 
-    return new Promise((resolve, reject) => {
-        User.findOne({userName: userName}).then((user) => {
-            if(user){
-                reject(res.json(Response("error", "Nome de usuário já cadastrado!", "/register")));
-            }else{
-                User.findOne({email: email}).then((findEmail) => {
-                    if(findEmail){
-                        reject(res.json(Response("error", "E-mail já cadastrado!", "/register")));
-                    }else{
-                        const newUser = new User({
-                            userName: userName,
-                            email: email,
-                            password: password,
-                            wage: wage
-                        });
-        
-                        bcrypt.genSalt(10, (error, salt) => {
-                            bcrypt.hash(newUser.password, salt, (error, hash) => {
-                                if(error){
-                                    reject(res.json(Response("error", "Erro ao cadastrar usuário!", "/register")));
-                                };
-        
-                                newUser.password = hash;
-        
-                                newUser.save().then(() => {
-                                    resolve(res.json(Response("success", "Usuário cadastrado com sucesso! Faça login para acessar sua conta.", "/register")));
-                                }).catch((err) => {
-                                    reject(res.json(Response("error", "Erro ao cadastrar usuário!", "/register")));
-                                });
-        
-                            });
-                        });
-                    }
-                }).catch((err) => {
-                    reject(res.json(Response("error", "Houve um erro ao verificar o email!", "/register")));
-                });
-            }
-        }).catch((err) => {
-            reject(res.json(Response("error", "Houve um erro ao verificar o nome de usuário!", "/register")));
-        });
-    }).then(res => res)
-    .catch(err => err);
+  try {
+    const userExists = await User.findOne({ userName: userName });
+    if (userExists) {
+      return res.json(Response("error", "Nome de usuário já cadastrado!", "/register"));
+    };
+
+    const emailExists = await User.findOne({ email: email });
+    if (emailExists) {
+      return res.json(Response("error", "E-mail já cadastrado!", "/register"));
+    };
+
+    const newUser = new User({
+      userName: userName,
+      email: email,
+      password: password,
+      wage: wage,
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+
+    await newUser.save();
+
+    return res.json(Response("success", "Usuário cadastrado com sucesso! Faça login para acessar sua conta.", "/register"));
+  } catch (err) {
+    return res.json(Response("error", "Houve um erro ao cadastrar o usuário!", "/register"));
+  };
 };
