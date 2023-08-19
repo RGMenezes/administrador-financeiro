@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from 'next-auth/react';
 import Link from "next/link";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 
 import { HiMenu, HiLogout, HiSun, HiMoon } from "react-icons/hi";
 import {IoClose, IoSettingsSharp} from "react-icons/io5"
@@ -16,6 +17,7 @@ import Logo from "../../../public/logo/logo";
 import LinkText from "../system/LinkText";
 
 export default function Header({setTheme}){
+    const { data: session, status } = useSession();
 
     const router = useRouter();
     const [user, setUser] = useState({});
@@ -29,41 +31,47 @@ export default function Header({setTheme}){
     const [fadeTheme, setFadeTheme] = useState("fade_out");
     const [fadeThemeDark, setFadeThemeDark] = useState("fade_in");
 
+
     useEffect(() => {
         setLoading(true);
-        
-        db.get("/user").then(res => {
-            if(res.data.type === "object"){
-                setUser(res.data.data);
-                setOnTheme(res.data.data.theme);
-                if(res.data.data.theme){
-                    setFadeTheme("fade_out");
-                    setTimeout(() => {
-                        setOnTheme(false);
-                        setFadeThemeDark("fade_in");
-                    }, 300);
-                }else{
-                    setFadeThemeDark("fade_out");
-                    setTimeout(() => {
-                        setOnTheme(true);
-                        setFadeTheme("fade_in");
-                    }, 300);
-                };
-            }else{
-                setOnAlert(res.data);
-                router.push(res.data.redirect);
-            };
-        }).catch(err => {
-            console.log(`Erro ao conectar com o banco de dados: ${err}`);
 
-        }).finally(() => setLoading(false));
+        if(status !== "authenticated" || !session){
+            router.push("/");
+        }else{
+            api.post("/user", session.user).then(res => {
+                if(res.data.type === "object"){
+                    setUser(res.data.data);
+                    setOnTheme(res.data.data.theme);
+                    if(res.data.data.theme){
+                        setFadeTheme("fade_out");
+                        setTimeout(() => {
+                            setOnTheme(false);
+                            setFadeThemeDark("fade_in");
+                        }, 300);
+                    }else{
+                        setFadeThemeDark("fade_out");
+                        setTimeout(() => {
+                            setOnTheme(true);
+                            setFadeTheme("fade_in");
+                        }, 300);
+                    };
+                }else{
+                    setOnAlert(res.data);
+                    router.push(res.data.redirect);
+                };
+            }).catch(err => {
+                console.log(`Erro ao conectar com o banco de dados: ${err}`);
+    
+            }).finally(() => setLoading(false));
+        };
+        
     }, []);
 
     useEffect(() => {
         setTheme(onTheme);
 
         if(user.email){
-            db.put("/user/edit/theme", {id: user.id, theme: user.theme}).then((res) => {
+            api.put("/user/edit/theme", {id: user.id, theme: user.theme}).then((res) => {
                 if(res.data.type == "error"){
                     setOnAlert(res.data);
                 };
@@ -94,7 +102,7 @@ export default function Header({setTheme}){
     const settings = () => router.push("/home/setting");
 
     function logout(){
-        db.get("/logout").then((res) => {
+        api.get("/logout").then((res) => {
             setOnAlert(res.data);
             router.push(res.data.redirect);
         }).catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`));

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 
 import styles from "./styles.module.css";
 
@@ -31,7 +31,7 @@ export default function Register(){
                 wage: e.target.wage.value
             };
     
-            db.post("/register", newUser).then((res) => {
+            api.post("/register", newUser).then((res) => {
                 setOnAlert({type: res.data.type, msg: res.data.msg});
             }).catch((err) => {
                 setOnAlert({type: "error", msg:"Erro ao enviar o registro!"});

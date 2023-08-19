@@ -22,12 +22,12 @@ export default function Home(){
     useEffect(() => {
         setLoading(true);
 
-        api.post("/user").then((res) => {
+        api.post("/user", session.user).then((res) => {
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));
 
-        api.POST("/data").then((res) => {
+        api.post("/data", session.user).then((res) => {
             setUserData(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
         .finally(() => setLoading(false));

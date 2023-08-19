@@ -9,14 +9,14 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 
 export default function layout({children}){
-    const route = useRouter();
+    const router = useRouter();
     const { data: session, status } = useSession();
     const [theme, setTheme] = useState(false);
     useEffect(() => {
         if(status !== "authenticated"){
-            route.push("/")
+            router.push("/")
         };
-    }, []);
+    }, [session, router]);
 
     return(
         <div className={theme ? `${styles.bg}`: `${styles.bg} ${styles.dark}`}>
