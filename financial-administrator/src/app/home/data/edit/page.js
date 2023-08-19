@@ -1,7 +1,8 @@
 "use client"
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import styles from "./page.module.css";
 
 import Loading from "@/components/system/Loader";
@@ -13,6 +14,7 @@ import LinkText from "@/components/system/LinkText";
 import Button from "@/components/form/Button";
 
 export default function DataRegister(){
+    const {data: session} = useSession();
     const router = useRouter();
 
     const [onAlert, setOnAlert] = useState({});
@@ -36,7 +38,7 @@ export default function DataRegister(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/data").then((res) => {
+        api.post("/data", {id: session.user.id}).then((res) => {
             const userData = res.data.data;
             setInvestments(userData.investment);
             setExpenses(userData.expense);
@@ -70,7 +72,7 @@ export default function DataRegister(){
         const arrayInvestments = contInvestments.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
         const arrayExpenses = contExpenses.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
-        db.put("/edit/data", {investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
+        api.put("/edit/data", {id: session.user.id, investment: arrayInvestments, expense: arrayExpenses}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 router.push(res.data.redirect);
