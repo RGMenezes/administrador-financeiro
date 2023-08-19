@@ -33,23 +33,8 @@ export async function PUT(req){
 
         await data.save();
 
-        return res.json(Response("success", "Dados cadastrados com sucesso!", "/home"));
+        return res.json(Response("success", "Dados editados com sucesso!", "/home"));
     }catch (err){
-        return res.json(Response("error", "Erro ao cadastrar dados!", "/home"));
+        return res.json(Response("error", "Erro ao editar dados!", "/home"));
     };
 };
-
-// if(!userData){
-//     res.json(Response("error", `Este usuário não possui dados cadastrados!`, "/home"));
-// }else{
-//     Administrator(req.user.wage, req.body.investment, req.body.expense)
-//     .then(AdminRes => {
-//         userData.investment = req.body.investment;
-//         userData.expense = req.body.expense;
-//         userData.financialReport = AdminRes;
-
-//         userData.save().then(() => res.json(Response("success", "Dados cadastrados com sucesso!", "/home")))
-//         .catch(err => res.json(Response("error", "Erro ao salvar dados no banco de dados!", "/home")));
-//     })
-//     .catch(err => res.json(Response("error", `Erro ao conectar ao adm`, "/home")));
-// };

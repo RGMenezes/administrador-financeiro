@@ -27,16 +27,13 @@ export async function PUT(req){
             res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
         };
 
-        const investmentCopy = data.investment;
-        investmentCopy.push(...investments);
-
-        data.investment = investmentCopy;
+        data.investment = investments;
         data.financialReport = AdminRes;
 
         await data.save();
 
-        return res.json(Response("success", "Dados cadastrados com sucesso!", "/home"));
+        return res.json(Response("success", "Dados editados com sucesso!", "/home"));
     }catch (err){
-        return res.json(Response("error", "Erro ao cadastrar dados!", "/home"));
+        return res.json(Response("error", "Erro ao editar dados!", "/home"));
     };
 };

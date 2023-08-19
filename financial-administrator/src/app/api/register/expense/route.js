@@ -37,6 +37,6 @@ export async function PUT(req){
 
         return res.json(Response("success", "Dados cadastrados com sucesso!", "/home"));
     }catch (err){
-        return res.json(Response("error", "Erro ao cadastrar despesas!", "/home"));
+        return res.json(Response("error", "Erro ao cadastrar dados!", "/home"));
     };
 };

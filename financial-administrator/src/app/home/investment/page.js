@@ -1,6 +1,7 @@
 "use client";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import {MdEdit, MdDelete} from "react-icons/md";
 import styles from "./page.module.css";
 
@@ -12,6 +13,7 @@ import InputNumber from "@/components/form/InputNumber";
 import Button from "@/components/form/Button";
 
 export default function Investment(){
+    const { data: session } = useSession();
 
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
@@ -50,7 +52,7 @@ export default function Investment(){
             return item;
         });
 
-        db.put("/edit/investment", investmentCopy).then((res) => {
+        api.put("/edit/investment", {id: session.user.id, investments: investmentCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setInvestment(investmentCopy);
@@ -70,7 +72,7 @@ export default function Investment(){
             };
         };
 
-        db.put("/delete/investment", investmentCopy).then((res) => {
+        api.put("/delete/investment", {id: session.user.id, investments: investmentCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setInvestment(investmentCopy);
@@ -82,7 +84,7 @@ export default function Investment(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/data").then((res) =>{
+        api.post("/data", {id: session.user.id}).then((res) =>{
             setInvestment(res.data.data.investment);
         }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
         .finally(() => setLoading(false));
