@@ -1,6 +1,7 @@
 "use client";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import {MdEdit, MdDelete} from "react-icons/md";
 import styles from "./page.module.css";
 
@@ -12,6 +13,7 @@ import InputNumber from "@/components/form/InputNumber";
 import Button from "@/components/form/Button";
 
 export default function Expenses(){
+    const {data: session} = useSession();
 
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
@@ -50,7 +52,7 @@ export default function Expenses(){
             return item;
         });
 
-        db.put("/edit/expense", expenseCopy).then((res) => {
+        api.put("/edit/expense", {id: session.user.id, expenses: expenseCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setExpenses(expenseCopy);
@@ -70,7 +72,7 @@ export default function Expenses(){
             };
         };
 
-        db.put("/delete/expense", expensesCopy).then((res) => {
+        api.put("/delete/expense", {id: session.user.id, expenses: expensesCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setExpenses(expensesCopy);
@@ -82,7 +84,7 @@ export default function Expenses(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/data").then((res) =>{
+        api.post("/data", {id: session.user.id}).then((res) =>{
             setExpenses(res.data.data.expense);
         }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
         .finally(() => setLoading(false));
