@@ -1,6 +1,7 @@
 "use client";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import {MdEdit, MdDelete} from "react-icons/md";
 import styles from "./page.module.css";
 
@@ -12,6 +13,7 @@ import InputNumber from "@/components/form/InputNumber";
 import Button from "@/components/form/Button";
 
 export default function FinancialGoal(){
+    const {data: session} = useSession();
 
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
@@ -50,7 +52,7 @@ export default function FinancialGoal(){
             return item;
         });
 
-        db.put("/edit/financial_goal", goalCopy).then((res) => {
+        api.put("/edit/financial_goal", {id: session.user.id, goals: goalCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setGoal(goalCopy);
@@ -70,7 +72,7 @@ export default function FinancialGoal(){
             };
         };
 
-        db.put("/delete/financial_goal", goalCopy).then((res) => {
+        api.put("/delete/financial_goal", {id: session.user.id, goals: goalCopy}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 setGoal(goalCopy);
@@ -82,7 +84,7 @@ export default function FinancialGoal(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/data").then((res) =>{
+        api.post("/data", {id: session.user.id}).then((res) =>{
             setGoal(res.data.data.financialGoal);
         }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
         .finally(() => setLoading(false));

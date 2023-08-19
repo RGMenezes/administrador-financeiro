@@ -4,12 +4,11 @@ import User from "@/api/model/User";
 import Data from "@/api/model/Data";
 
 import Response from "@/api/helper/Response";
-import Administrator from "@/api/core/Administrator";
 
 export async function PUT(req){
     Database();
     const res = NextResponse;
-    const {id, investments} = await req.json();
+    const {id, goals} = await req.json();
 
     try{
         const user = await User.findOne({_id: id});
@@ -22,21 +21,12 @@ export async function PUT(req){
             return res.json(Response("error", `Este usuário não possui dados cadastrados!`, "/home"));
         };
 
-        const AdminRes = await Administrator(user.wage, investments, data.expense);
-        if(!AdminRes){
-            return res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
-        };
-
-        const investmentCopy = data.investment;
-        investmentCopy.push(...investments);
-
-        data.investment = investmentCopy;
-        data.financialReport = AdminRes;
+        data.financialGoal = goals;
 
         await data.save();
 
-        return res.json(Response("success", "Dados cadastrados com sucesso!", "/home"));
+        return res.json(Response("success", "Dados editados com sucesso!", "/home"));
     }catch (err){
-        return res.json(Response("error", "Erro ao cadastrar dados!", "/home"));
+        return res.json(Response("error", "Erro ao editar dados!", "/home"));
     };
 };

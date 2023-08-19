@@ -18,13 +18,13 @@ export async function PUT(req){
         };
 
         const data = await Data.findById(id);
-        if(data){
-            res.json(Response("error", `Este usuário já possui dados cadastrados!`, "/home"));
+        if(!data){
+            return res.json(Response("error", `Este usuário já possui dados cadastrados!`, "/home"));
         };
 
         const AdminRes = await Administrator(user.wage, investment, expense);
         if(!AdminRes){
-            res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
+            return res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
         };
 
         data.investment = investment;

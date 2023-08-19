@@ -82,15 +82,16 @@ export default function Home(){
                             </div>
                         : 
                             <div className={styles.row_x}>
-                                {userData.financialGoal.map((item, index) => item != userData.financialGoal[0] && 
-                                (<aside key={`${item[0]}_${index}`} className={styles.card_goal}>
-                                    <p>
-                                        {item[0]}
-                                    </p>
-                                    <p>
-                                        <strong>R${item[1]}</strong>
-                                    </p>
-                                </aside>))}
+                                {userData.financialGoal.map((item, index) =>(
+                                    <aside key={`${item[0]}_${index}`} className={styles.card_goal}>
+                                        <p>
+                                            {item[0]}
+                                        </p>
+                                        <p>
+                                            <strong>R${item[1]}</strong>
+                                        </p>
+                                    </aside>
+                                ))}
                             </div>
                         }
                     </section>

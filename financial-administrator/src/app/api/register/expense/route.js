@@ -19,12 +19,12 @@ export async function PUT(req){
 
         const data = await Data.findById(id);
         if(!data){
-            res.json(Response("error", `Este usuário não possui dados cadastrados!`, "/home"));
+            return res.json(Response("error", `Este usuário não possui dados cadastrados!`, "/home"));
         };
 
         const AdminRes = await Administrator(user.wage, data.investment, expenses);
         if(!AdminRes){
-            res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
+            return res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
         };
 
         const expenseCopy = data.expense;
