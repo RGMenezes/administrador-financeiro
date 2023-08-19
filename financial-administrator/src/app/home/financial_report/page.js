@@ -1,6 +1,7 @@
 "use client";
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 import styles from "./page.module.css";
 
@@ -9,6 +10,7 @@ import Loader from "@/components/system/Loader";
 import LinkText from "@/components/system/LinkText";
 
 export default function FinancialReport(){
+    const {data: session} = useSession();
     const [onAlert, setOnAlert] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -18,12 +20,12 @@ export default function FinancialReport(){
     useEffect(() => {
         setLoading(true);
 
-        db.get("/user").then((res) =>{
+        api.post("/user", {id: session.user.id}).then((res) =>{
             setUser(res.data.data);
         }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
         .finally(() => setLoading(false));
 
-        db.get("/data").then((res) =>{
+        api.post("/data", {id: session.user.id}).then((res) =>{
             setUserData(res.data.data);
         }).catch(err => console.log(`Erro ao conectar com o servidor: ${err}`))
         .finally(() => setLoading(false));
