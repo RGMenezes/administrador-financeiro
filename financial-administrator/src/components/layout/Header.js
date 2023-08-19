@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from "next/link";
 import api from "@/api/axiosApi";
 
@@ -100,12 +100,7 @@ export default function Header({setTheme}){
 
     const settings = () => router.push("/home/setting");
 
-    function logout(){
-        api.get("/logout").then((res) => {
-            setOnAlert(res.data);
-            router.push(res.data.redirect);
-        }).catch(err => console.log(`Erro ao conectar ao banco de dados: ${err}`));
-    };
+    const logout = async () => await signOut();
 
     return(
         <header className={styles.header_container} >
