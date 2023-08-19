@@ -9,7 +9,7 @@ import Administrator from "@/api/core/Administrator";
 export async function PUT(req){
     Database();
     const res = NextResponse;
-    const {id, investments} = await req.json();
+    const {id, expenses} = await req.json();
 
     try{
         const user = await User.findOne({_id: id});
@@ -22,15 +22,15 @@ export async function PUT(req){
             res.json(Response("error", `Este usuário não possui dados cadastrados!`, "/home"));
         };
 
-        const AdminRes = await Administrator(user.wage, investments, data.expense);
+        const AdminRes = await Administrator(user.wage, data.investment, expenses);
         if(!AdminRes){
             res.json(Response("error", `Erro ao conectar ao admin!`, "/home"));
         };
 
-        const investmentCopy = data.investment;
-        investmentCopy.push(...investments);
+        const expenseCopy = data.expense;
+        expenseCopy.push(...expenses);
 
-        data.investment = investmentCopy;
+        data.expense = expenseCopy;
         data.financialReport = AdminRes;
 
         await data.save();
