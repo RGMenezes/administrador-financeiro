@@ -37,6 +37,7 @@ const authOptions = {
             }
         })
     ],
+    secret: process.env.SECRET,
     pages: {
         signIn: '/home',
         signOut: '/',
