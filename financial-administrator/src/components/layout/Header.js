@@ -41,7 +41,6 @@ export default function Header({setTheme}){
             api.post("/user", session.user).then(res => {
                 if(res.data.type === "object"){
                     setUser(res.data.data);
-                    setOnTheme(res.data.data.theme);
                     if(res.data.data.theme){
                         setFadeTheme("fade_out");
                         setTimeout(() => {
@@ -69,7 +68,7 @@ export default function Header({setTheme}){
 
     useEffect(() => {
         setTheme(onTheme);
-
+        
         if(user.email){
             api.put("/user/edit/theme", {id: user.id, theme: user.theme}).then((res) => {
                 if(res.data.type == "error"){
