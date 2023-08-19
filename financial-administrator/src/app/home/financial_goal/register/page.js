@@ -1,7 +1,8 @@
 'use client';
-import db from "@/api/axiosApi";
+import api from "@/api/axiosApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import styles from "./page.module.css";
 
@@ -13,6 +14,8 @@ import Button from "@/components/form/Button";
 import AlertBox from "@/components/system/AlertBox";
 
 export default function FinancialGoalRegister() {
+    const {data: session} = useSession();
+
     const router = useRouter();
     const [onAlert, setOnAlert] = useState({});
     const [loading, setLoading] = useState(false);
@@ -28,7 +31,7 @@ export default function FinancialGoalRegister() {
 
         const arrayGoal = goal.map(item => [e.target[`Text_${item}`].value, parseInt(e.target[`Number_${item}`].value)]);
 
-        db.post("/register/financial_goal", arrayGoal).then((res) => {
+        api.post("/register/financial_goal", {id: session.user.id, goals: arrayGoal}).then((res) => {
             setOnAlert(res.data);
             if(res.data.type == "success"){
                 router.push(res.data.redirect);
