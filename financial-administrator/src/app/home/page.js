@@ -10,7 +10,7 @@ import AlertBox from "@/components/system/AlertBox";
 import LinkText from "@/components/system/LinkText";
 import GraphSubtitle from "@/components/graph/GraphSubtitle";
 
-export default function Home(){
+export default function Home() {
     const { data: session } = useSession();
 
     const [loading, setLoading] = useState(false);
@@ -25,30 +25,30 @@ export default function Home(){
         api.post("/user", session.user).then((res) => {
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
-        .finally(() => setLoading(false));
+            .finally(() => setLoading(false));
 
         api.post("/data", session.user).then((res) => {
             setUserData(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
-        .finally(() => setLoading(false));
-    }, []);
+            .finally(() => setLoading(false));
+    }, [user, userData]);
 
-    const totalDataUser = (arrayData) => arrayData.map(item => item = item[1]).reduce((acc, cur) => acc + cur, 0); 
+    const totalDataUser = (arrayData) => arrayData.map(item => item = item[1]).reduce((acc, cur) => acc + cur, 0);
 
-    return(
+    return (
         <>
             {loading && <Loading />}
-            <AlertBox alert={onAlert}/>
-            {!userData ? 
+            <AlertBox alert={onAlert} />
+            {!userData ?
                 <section className={styles.container_data_register}>
                     <p>Nenhum dado encontrado, registre seus dados para utilizar o sistema!</p>
-                    <LinkText 
+                    <LinkText
                         text="Cadastrar dados"
                         to="/home/data/register"
                         detach={true}
                     />
                 </section>
-            :
+                :
                 <div className={styles.container}>
                     <article className={styles.summary} >
                         <div className={styles.summary_profile}>
@@ -71,7 +71,7 @@ export default function Home(){
                     <section className={styles.goal} >
                         <h4>Metas</h4>
 
-                        {!userData.financialGoal[0] === true ? 
+                        {!userData.financialGoal[0] === true ?
                             <div className={styles.container_goal_register}>
                                 <p>Não há metas</p>
                                 <LinkText
@@ -80,9 +80,9 @@ export default function Home(){
                                     detach={true}
                                 />
                             </div>
-                        : 
+                            :
                             <div className={styles.row_x}>
-                                {userData.financialGoal.map((item, index) =>(
+                                {userData.financialGoal.map((item, index) => (
                                     <aside key={`${item[0]}_${index}`} className={styles.card_goal}>
                                         <p>
                                             {item[0]}
@@ -99,7 +99,7 @@ export default function Home(){
                     <section className={styles.financial}>
                         <article className={styles.expense} >
                             <h3>Despesas</h3>
-                            
+
                             <div className={styles.graph}>
                                 <GraphSubtitle
                                     data={userData.expense}
@@ -107,11 +107,11 @@ export default function Home(){
                                     graph="sectors"
                                 />
                             </div>
-                        </article> 
+                        </article>
 
                         <article className={styles.investment} >
                             <h3>Investimentos</h3>
-                            
+
                             <div className={styles.graph}>
                                 <GraphSubtitle
                                     data={userData.investment}

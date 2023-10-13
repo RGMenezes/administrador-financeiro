@@ -7,7 +7,7 @@ import Link from "next/link";
 import api from "@/api/axiosApi";
 
 import { HiMenu, HiLogout, HiSun, HiMoon } from "react-icons/hi";
-import {IoClose, IoSettingsSharp} from "react-icons/io5"
+import { IoClose, IoSettingsSharp } from "react-icons/io5"
 import styles from "./Header.module.css";
 
 import Loading from "../system/Loader";
@@ -16,7 +16,7 @@ import AlertBox from "../system/AlertBox";
 import Logo from "../../../public/logo/logo";
 import LinkText from "../system/LinkText";
 
-export default function Header({setTheme}){
+export default function Header({ setTheme }) {
     const { data: session, status } = useSession();
 
     const router = useRouter();
@@ -35,57 +35,57 @@ export default function Header({setTheme}){
     useEffect(() => {
         setLoading(true);
 
-        if(status !== "authenticated" || !session){
+        if (status !== "authenticated" || !session) {
             router.push("/");
-        }else{
+        } else {
             api.post("/user", session.user).then(res => {
-                if(res.data.type === "object"){
+                if (res.data.type === "object") {
                     setUser(res.data.data);
-                    if(res.data.data.theme){
+                    if (res.data.data.theme) {
                         setFadeTheme("fade_out");
                         setTimeout(() => {
                             setOnTheme(false);
                             setFadeThemeDark("fade_in");
                         }, 300);
-                    }else{
+                    } else {
                         setFadeThemeDark("fade_out");
                         setTimeout(() => {
                             setOnTheme(true);
                             setFadeTheme("fade_in");
                         }, 300);
                     };
-                }else{
+                } else {
                     setOnAlert(res.data);
                     router.push(res.data.redirect);
                 };
             }).catch(err => {
                 console.log(`Erro ao conectar com o banco de dados: ${err}`);
-    
+
             }).finally(() => setLoading(false));
         };
-        
-    }, []);
+
+    }, [user]);
 
     useEffect(() => {
         setTheme(onTheme);
-        
-        if(user.email){
-            api.put("/user/edit/theme", {id: user.id, theme: user.theme}).then((res) => {
-                if(res.data.type == "error"){
+
+        if (user.email) {
+            api.put("/user/edit/theme", { id: user.id, theme: user.theme }).then((res) => {
+                if (res.data.type == "error") {
                     setOnAlert(res.data);
                 };
             }).catch(err => console.log(`Erro ao conectar no banco de dados: ${err}`));
         };
     }, [onTheme]);
 
-    function changeTheme(){
-        if(onTheme){
+    function changeTheme() {
+        if (onTheme) {
             setFadeTheme("fade_out");
             setTimeout(() => {
                 setOnTheme(false);
                 setFadeThemeDark("fade_in");
             }, 300);
-        }else{
+        } else {
             setFadeThemeDark("fade_out");
             setTimeout(() => {
                 setOnTheme(true);
@@ -102,7 +102,7 @@ export default function Header({setTheme}){
 
     const logout = async () => await signOut();
 
-    return(
+    return (
         <header className={styles.header_container} >
 
             {loading && <Loading />}
@@ -129,7 +129,7 @@ export default function Header({setTheme}){
                         <li><LinkText to="/home/financial_goal" text="Visualizar metas" spaced={true} /></li>
                         <li><LinkText to="/home/data/edit" text="Atualizar dados" spaced={true} /></li>
                     </ul>
-                    <hr/>
+                    <hr />
                     <ul>
                         <li><LinkText to="/home/financial_report" text="Relatório financeiro" spaced={true} /></li>
                         <li><LinkText to="/home/financial_report#Positives" text="Pontos positivos" spaced={true} /></li>
@@ -141,12 +141,12 @@ export default function Header({setTheme}){
                 <footer>
                     <IoSettingsSharp tabIndex={0} onKeyDown={(e) => e.key == "Enter" && settings()} onClick={settings} className={styles.icon} />
 
-                    {onTheme ? 
-                        <HiMoon tabIndex={0} onKeyDown={(e) => e.key == "Enter" && changeTheme()} onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} /> 
-                    : 
+                    {onTheme ?
+                        <HiMoon tabIndex={0} onKeyDown={(e) => e.key == "Enter" && changeTheme()} onClick={changeTheme} className={`${styles.icon} ${styles[fadeTheme]}`} />
+                        :
                         <HiSun tabIndex={0} onKeyDown={(e) => e.key == "Enter" && changeTheme()} onClick={changeTheme} className={`${styles.icon} ${styles[fadeThemeDark]}`} />
                     }
-                    
+
                     <HiLogout tabIndex={0} onKeyDown={(e) => e.key == "Enter" && logout()} onClick={logout} className={styles.icon} />
                 </footer>
             </section>
