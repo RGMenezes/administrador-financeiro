@@ -40,6 +40,7 @@ export default function Header({ setTheme }) {
         } else if(!session) {
             console.log("session não encontrada", session);
         }else{
+            console.log("encontramos a sessao?", session);
             api.post("/user", session.user).then(res => {
                 if (res.data.type === "object") {
                     setUser(res.data.data);
