@@ -11,7 +11,7 @@ import LinkText from "@/components/system/LinkText";
 import GraphSubtitle from "@/components/graph/GraphSubtitle";
 
 export default function Home() {
-    const { data: session } = useSession();
+    const { data: session } = useSession({required: true,});
 
     const [loading, setLoading] = useState(false);
     const [onAlert, setOnAlert] = useState({});
