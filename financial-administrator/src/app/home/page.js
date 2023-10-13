@@ -20,19 +20,21 @@ export default function Home() {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        setLoading(true);
+        if (typeof session !== undefined) {
+            setLoading(true);
 
-        console.log(user, session.user, session)
+            console.log(user, session.user, session)
 
-        api.post("/user", session.user).then((res) => {
-            setUser(res.data.data);
-        }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
-            .finally(() => setLoading(false));
+            api.post("/user", session.user).then((res) => {
+                setUser(res.data.data);
+            }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
+                .finally(() => setLoading(false));
 
-        api.post("/data", session.user).then((res) => {
-            setUserData(res.data.data);
-        }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
-            .finally(() => setLoading(false));
+            api.post("/data", session.user).then((res) => {
+                setUserData(res.data.data);
+            }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
+                .finally(() => setLoading(false));
+        }
     }, []);
 
     const totalDataUser = (arrayData) => arrayData.map(item => item = item[1]).reduce((acc, cur) => acc + cur, 0);
