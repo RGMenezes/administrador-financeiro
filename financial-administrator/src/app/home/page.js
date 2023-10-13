@@ -22,6 +22,8 @@ export default function Home() {
     useEffect(() => {
         setLoading(true);
 
+        console.log(user, session.user, session)
+
         api.post("/user", session.user).then((res) => {
             setUser(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))

@@ -36,7 +36,6 @@ export default function Header({ setTheme }) {
         setLoading(true);
 
         if (status !== "authenticated" || !session) {
-            console.log(status);
             router.push("/");
         } else {
             api.post("/user", session.user).then(res => {
