@@ -7,6 +7,7 @@ import styles from "./layout.module.css"
 
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import Loader from "@/components/system/Loader";
 
 export default function layout({ children }) {
     const router = useRouter();
@@ -19,15 +20,24 @@ export default function layout({ children }) {
         };
     }, [status, router]);
 
-    return (
-        <div className={theme ? `${styles.bg}` : `${styles.bg} ${styles.dark}`}>
-            <Header setTheme={setTheme} />
-
-            <main className={styles.main} >
-                {children}
-            </main>
-
-            <Footer />
-        </div>
-    );
+    if(status == "loading"){
+        return (
+            <div className={theme ? `${styles.bg}` : `${styles.bg} ${styles.dark}`}>
+                <Loader />
+            </div>
+        );
+    };
+    if(status == "authenticated"){
+        return (
+            <div className={theme ? `${styles.bg}` : `${styles.bg} ${styles.dark}`}>
+                <Header setTheme={setTheme} />
+    
+                <main className={styles.main} >
+                    {children}
+                </main>
+    
+                <Footer />
+            </div>
+        );
+    }
 };
