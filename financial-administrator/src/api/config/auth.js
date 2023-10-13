@@ -48,7 +48,8 @@ const authOptions = {
             session.user.id = token.sub;
             return session;
         }
-    }
+    },
+    useSecureCookies: process.env.COOKIES
     
 };
 
