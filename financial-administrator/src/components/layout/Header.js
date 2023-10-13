@@ -35,9 +35,11 @@ export default function Header({ setTheme }) {
     useEffect(() => {
         setLoading(true);
 
-        if (status == "unauthenticated" || !session) {
+        if (status == "unauthenticated") {
             router.push("/");
-        } else {
+        } else if(!session) {
+            console.log("session não encontrada", session);
+        }else{
             api.post("/user", session.user).then(res => {
                 if (res.data.type === "object") {
                     setUser(res.data.data);
