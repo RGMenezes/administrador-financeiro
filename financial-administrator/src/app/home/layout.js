@@ -8,18 +8,19 @@ import styles from "./layout.module.css"
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 
-export default function layout({children}){
+export default function layout({ children }) {
     const router = useRouter();
     const { data: session, status } = useSession();
     const [theme, setTheme] = useState(false);
     useEffect(() => {
-        if(status === "unauthenticated"){
-            router.push("/")
+        console.log(status)
+        if (status === "unauthenticated") {
+            router.push("/");
         };
-    }, [session, router]);
+    }, [status, router]);
 
-    return(
-        <div className={theme ? `${styles.bg}`: `${styles.bg} ${styles.dark}`}>
+    return (
+        <div className={theme ? `${styles.bg}` : `${styles.bg} ${styles.dark}`}>
             <Header setTheme={setTheme} />
 
             <main className={styles.main} >
