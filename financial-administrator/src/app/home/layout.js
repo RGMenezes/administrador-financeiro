@@ -14,7 +14,7 @@ export default function layout({ children }) {
     const [theme, setTheme] = useState(false);
     useEffect(() => {
         console.log(status)
-        if (status === "unauthenticated") {
+        if (status == "unauthenticated") {
             router.push("/");
         };
     }, [status, router]);
