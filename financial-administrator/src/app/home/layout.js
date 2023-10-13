@@ -13,7 +13,7 @@ export default function layout({children}){
     const { data: session, status } = useSession();
     const [theme, setTheme] = useState(false);
     useEffect(() => {
-        if(status !== "authenticated"){
+        if(status === "unauthenticated"){
             router.push("/")
         };
     }, [session, router]);
