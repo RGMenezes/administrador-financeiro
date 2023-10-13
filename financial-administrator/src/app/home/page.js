@@ -31,7 +31,7 @@ export default function Home() {
             setUserData(res.data.data);
         }).catch((err) => console.log(`Não foi possivel acessar o banco de dados: ${err}`))
             .finally(() => setLoading(false));
-    }, [user, userData]);
+    }, []);
 
     const totalDataUser = (arrayData) => arrayData.map(item => item = item[1]).reduce((acc, cur) => acc + cur, 0);
 

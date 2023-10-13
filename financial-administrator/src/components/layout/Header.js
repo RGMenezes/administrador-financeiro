@@ -64,7 +64,7 @@ export default function Header({ setTheme }) {
             }).finally(() => setLoading(false));
         };
 
-    }, [user]);
+    }, []);
 
     useEffect(() => {
         setTheme(onTheme);
